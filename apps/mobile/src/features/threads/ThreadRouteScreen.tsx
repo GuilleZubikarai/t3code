@@ -575,7 +575,10 @@ function ThreadRouteContent(
 
     const nextId = nextOpenTerminalId({
       listedTerminalIds: terminalMenuSessions.map((session) => session.terminalId),
-      ...(knownTerminalSessions === null ? { uniqueSuffix: uuidv4() } : {}),
+      ...(knownTerminalSessions === null ||
+      !readEnvironmentScope(selectedThread.environmentId, AuthTerminalReadScope)
+        ? { uniqueSuffix: uuidv4() }
+        : {}),
     });
     void navigation.navigate("ThreadTerminal", {
       environmentId: String(selectedThread.environmentId),
@@ -613,7 +616,10 @@ function ThreadRouteContent(
 
       const targetTerminalId = resolveProjectScriptTerminalId({
         existingTerminalIds: terminalMenuSessions.map((session) => session.terminalId),
-        ...(knownTerminalSessions === null ? { uniqueSuffix: uuidv4() } : {}),
+        ...(knownTerminalSessions === null ||
+        !readEnvironmentScope(selectedThread.environmentId, AuthTerminalReadScope)
+          ? { uniqueSuffix: uuidv4() }
+          : {}),
         hasRunningTerminal: terminalMenuSessions.some(
           (session) => session.status === "running" || session.status === "starting",
         ),
