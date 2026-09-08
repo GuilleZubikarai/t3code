@@ -45,9 +45,17 @@ export function resolveLocale(
   return DEFAULT_LOCALE;
 }
 
+/**
+ * The packaged desktop app ships only the en-US locale pak, so the renderer's
+ * `navigator.language` is pinned to English regardless of the OS. The desktop
+ * bridge reports the real OS locale; browsers report it directly.
+ */
 function readSystemLanguages(): ReadonlyArray<string> {
-  if (typeof navigator === "undefined") return [];
-  return navigator.languages.length > 0 ? navigator.languages : [navigator.language];
+  if (typeof window === "undefined") return [];
+  const desktopLocale = window.desktopBridge?.getSystemLocale?.() ?? null;
+  const browserLanguages =
+    navigator.languages.length > 0 ? navigator.languages : [navigator.language];
+  return desktopLocale ? [desktopLocale, ...browserLanguages] : browserLanguages;
 }
 
 let currentLocale: AppLocale = resolveLocale(readLocalePreference(), readSystemLanguages());
