@@ -157,6 +157,7 @@ jobs:
           mkdir -p release-publish
           shopt -s nullglob
           for file in release/*.dmg release/*.zip release/*.AppImage release/*.blockmap release/*.yml; do
+            [[ "$(basename "$file")" == "builder-debug.yml" ]] && continue
             cp "$file" release-publish/
           done
           if [[ "${{ matrix.platform }}" == "mac" && "${{ matrix.arch }}" != "arm64" ]]; then
