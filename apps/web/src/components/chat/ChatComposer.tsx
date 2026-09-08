@@ -904,23 +904,23 @@ const runtimeModeConfig: Record<
   { label: string; description: string; icon: LucideIcon }
 > = {
   "approval-required": {
-    label: "Supervised",
-    description: "Ask before commands and file changes.",
+    label: t("Supervised"),
+    description: t("Ask before commands and file changes."),
     icon: LockIcon,
   },
   "auto-accept-edits": {
-    label: "Auto-accept edits",
-    description: "Auto-approve edits, ask before other actions.",
+    label: t("Auto-accept edits"),
+    description: t("Auto-approve edits, ask before other actions."),
     icon: PenLineIcon,
   },
   auto: {
-    label: "Auto",
-    description: "Supported providers approve routine actions; others still ask.",
+    label: t("Auto"),
+    description: t("Supported providers approve routine actions; others still ask."),
     icon: SparklesIcon,
   },
   "full-access": {
-    label: "Full access",
-    description: "Allow commands and edits without prompts.",
+    label: t("Full access"),
+    description: t("Allow commands and edits without prompts."),
     icon: LockOpenIcon,
   },
 };
@@ -1013,8 +1013,8 @@ const ComposerFooterModeControls = memo(function ComposerFooterModeControls(prop
   const RuntimeModeIcon = runtimeModeOption.icon;
   const interactionModeTooltip =
     props.interactionMode === "plan"
-      ? "Plan mode — click to return to normal build mode"
-      : "Default mode — click to enter plan mode";
+      ? t("Plan mode — click to return to normal build mode")
+      : t("Default mode — click to enter plan mode");
 
   const interactionModeToggle = props.showInteractionModeToggle ? (
     <>
@@ -1052,7 +1052,7 @@ const ComposerFooterModeControls = memo(function ComposerFooterModeControls(prop
             />
           )}
           <span className="sr-only sm:not-sr-only">
-            {props.interactionMode === "plan" ? "Plan" : "Build"}
+            {props.interactionMode === "plan" ? t("Plan") : t("Build")}
           </span>
         </TooltipTrigger>
         <TooltipPopup side="top">{interactionModeTooltip}</TooltipPopup>
@@ -5208,13 +5208,13 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                 >
                   {activePendingProgress
                     ? isChoiceOnlyPendingQuestion
-                      ? "Choose an option above"
+                      ? t("Choose an option above")
                       : activePendingProgress.customAnswer ||
-                        "Type your own answer, or leave this blank to use the selected option"
+                        t("Type your own answer, or leave this blank to use the selected option")
                     : prompt.trim() ||
                       (showProviderUnavailable
-                        ? "Enable a provider in Settings"
-                        : "Ask anything...")}
+                        ? t("Enable a provider in Settings")
+                        : t("Ask anything..."))}
                 </button>
                 {collapsedComposerImagePreviews}
                 <button
@@ -5722,8 +5722,10 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                         "Resolve this approval request to continue")
                       : activePendingProgress
                         ? isChoiceOnlyPendingQuestion
-                          ? "Choose an option above"
-                          : "Type your own answer, or leave this blank to use the selected option"
+                          ? t("Choose an option above")
+                          : t(
+                              "Type your own answer, or leave this blank to use the selected option",
+                            )
                         : showPlanFollowUpPrompt && activeProposedPlan
                           ? t(
                               "Add feedback to refine the plan, or leave this blank to implement it",

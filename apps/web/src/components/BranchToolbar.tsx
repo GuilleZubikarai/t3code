@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { scopeProjectRef, scopeThreadRef } from "@t3tools/client-runtime/environment";
 import type { EnvironmentId, ThreadId } from "@t3tools/contracts";
 import {
@@ -177,7 +178,7 @@ const MobileRunContextSelector = memo(function MobileRunContextSelector({
         {showEnvironmentPicker && availableEnvironments && onEnvironmentChange ? (
           <>
             <MenuGroup>
-              <MenuGroupLabel>Run on</MenuGroupLabel>
+              <MenuGroupLabel>{t("Run on")}</MenuGroupLabel>
               <MenuRadioGroup
                 value={autoEnvironmentLabel ? "auto" : environmentId}
                 onValueChange={(value) =>
@@ -220,7 +221,7 @@ const MobileRunContextSelector = memo(function MobileRunContextSelector({
           </>
         ) : null}
         <MenuGroup>
-          <MenuGroupLabel>Workspace</MenuGroupLabel>
+          <MenuGroupLabel>{t("Workspace")}</MenuGroupLabel>
           <MenuRadioGroup
             value={effectiveEnvMode}
             onValueChange={(value) => {

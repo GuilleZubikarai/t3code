@@ -1100,7 +1100,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: {
   const topStatus =
     status === "working"
       ? {
-          label: "Working",
+          label: t("Working"),
           icon: "working" as const,
           // No shimmer: a label that animates forever is noise in a sidebar
           // full of them (and repaints every vsync on high-refresh displays).
@@ -1113,37 +1113,37 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: {
         ? {
             // Monitoring is calm background presence, not active progress
             // (monitoring-pill D6), so it keeps the label at full strength.
-            label: "Monitoring",
+            label: t("Monitoring"),
             icon: null,
             className: "text-sky-600 dark:text-sky-400",
           }
         : status === "approval"
           ? {
-              label: "Approval",
+              label: t("Approval"),
               icon: null,
               className: "text-amber-700 dark:text-amber-300",
             }
           : status === "input"
             ? {
-                label: "Input",
+                label: t("Input"),
                 icon: null,
                 className: "text-indigo-600 dark:text-indigo-300",
               }
             : status === "failed"
               ? {
-                  label: "Failed",
+                  label: t("Failed"),
                   icon: null,
                   className: "text-red-700 dark:text-red-300",
                 }
               : isWoke
                 ? {
-                    label: "Woke",
+                    label: t("Woke"),
                     icon: "woke" as const,
                     className: "text-amber-700 dark:text-amber-300",
                   }
                 : isUnread
                   ? {
-                      label: "Done",
+                      label: t("Done"),
                       icon: "done" as const,
                       className: "text-emerald-700 dark:text-emerald-300",
                     }
@@ -2310,7 +2310,7 @@ export default function Sidebar() {
   // while the popup search filters the same collection.
   const projectScopeItems = useMemo(
     () => [
-      { value: "all", label: "All projects" },
+      { value: "all", label: t("All projects") },
       ...projectGroups.map((project) => ({
         value: project.projectKey,
         label: project.displayName,
@@ -4424,7 +4424,7 @@ export default function Sidebar() {
                       <FolderIcon className="size-4 shrink-0" />
                     )}
                     <span className="min-w-0 flex-1 truncate">
-                      {scopedProjectGroup?.displayName ?? "All projects"}
+                      {scopedProjectGroup?.displayName ?? t("All projects")}
                     </span>
                     <ChevronDownIcon className="-mr-px size-4 shrink-0" />
                   </ComboboxTrigger>
@@ -4805,8 +4805,8 @@ export default function Sidebar() {
                                 marker="snoozed-header"
                                 label={
                                   snoozedShelfExpanded
-                                    ? "Snoozed"
-                                    : `Snoozed (${snoozedThreads.length})`
+                                    ? t("Snoozed")
+                                    : `${t("Snoozed")} (${snoozedThreads.length})`
                                 }
                                 toggle={{
                                   expanded: snoozedShelfExpanded,
@@ -4822,8 +4822,8 @@ export default function Sidebar() {
                                 marker="settled-header"
                                 label={
                                   settledShelfExpanded
-                                    ? "Settled"
-                                    : `Settled (${settledThreads.length})`
+                                    ? t("Settled")
+                                    : `${t("Settled")} (${settledThreads.length})`
                                 }
                                 dragging={from !== null}
                                 isDropTarget={dragTargetSection === "settled"}

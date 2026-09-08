@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type {
   ProjectScript,
   ResolvedKeybindingsConfig,
@@ -144,7 +145,7 @@ export default function ProjectScriptsControl({
             <ScriptIcon icon={fileScript.icon ?? "play"} className="size-4" />
             <span className="truncate">{fileScript.name}</span>
             <MenuShortcut className="ms-auto">
-              <DownloadIcon className="size-3.5" aria-label="Import" />
+              <DownloadIcon className="size-3.5" aria-label={t("Import")} />
             </MenuShortcut>
           </MenuItem>
         ))}
@@ -155,7 +156,7 @@ export default function ProjectScriptsControl({
   return (
     <>
       {primaryScript ? (
-        <Group aria-label="Project scripts">
+        <Group aria-label={t("Project scripts")}>
           <Tooltip>
             <TooltipTrigger
               render={
@@ -185,7 +186,7 @@ export default function ProjectScriptsControl({
             onOpenChange={(open) => setActionsMenuOpen({ scripts: open, imports: false })}
           >
             <MenuTrigger
-              render={<Button size="icon-xs" variant="outline" aria-label="Script actions" />}
+              render={<Button size="icon-xs" variant="outline" aria-label={t("Script actions")} />}
             >
               <ChevronDownIcon className="size-4" />
             </MenuTrigger>
@@ -236,7 +237,7 @@ export default function ProjectScriptsControl({
               {importMenuItems}
               <MenuItem className={dropdownItemClassName} onClick={openAddDialog}>
                 <PlusIcon className="size-4" />
-                Add action
+                {t("Add action")}
               </MenuItem>
             </MenuPopup>
           </Menu>
@@ -247,10 +248,12 @@ export default function ProjectScriptsControl({
           open={actionsMenuOpen.imports}
           onOpenChange={(open) => setActionsMenuOpen({ scripts: false, imports: open })}
         >
-          <MenuTrigger render={<Button size="xs" variant="outline" aria-label="Project actions" />}>
+          <MenuTrigger
+            render={<Button size="xs" variant="outline" aria-label={t("Project actions")} />}
+          >
             <PlusIcon className="size-3.5" />
             <span className="sr-only @3xl/header-actions:not-sr-only @3xl/header-actions:ml-0.5">
-              Add action
+              {t("Add action")}
             </span>
             <ChevronDownIcon className="size-3.5" />
           </MenuTrigger>
@@ -258,7 +261,7 @@ export default function ProjectScriptsControl({
             {importMenuItems}
             <MenuItem className={dropdownItemClassName} onClick={openAddDialog}>
               <PlusIcon className="size-4" />
-              Add action
+              {t("Add action")}
             </MenuItem>
           </MenuPopup>
         </Menu>
@@ -270,7 +273,7 @@ export default function ProjectScriptsControl({
                 size="xs"
                 variant="outline"
                 className="w-7 px-0 sm:w-6 @3xl/header-actions:w-auto! @3xl/header-actions:px-[calc(--spacing(2)-1px)]"
-                aria-label="Add action"
+                aria-label={t("Add action")}
                 // The tooltip wrapper replaces data-slot="button", so themed
                 // toolbar styling needs its own hook.
                 data-toolbar-control=""
@@ -280,10 +283,10 @@ export default function ProjectScriptsControl({
           >
             <PlusIcon className="size-3.5" />
             <span className="sr-only @3xl/header-actions:not-sr-only @3xl/header-actions:ml-0.5">
-              Add action
+              {t("Add action")}
             </span>
           </TooltipTrigger>
-          <TooltipPopup side="top">Add action</TooltipPopup>
+          <TooltipPopup side="top">{t("Add action")}</TooltipPopup>
         </Tooltip>
       )}
 

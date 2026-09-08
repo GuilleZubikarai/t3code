@@ -1,3 +1,4 @@
+import { t, tNode } from "~/i18n/t";
 import { useAtomValue } from "@effect/atom-react";
 import { type ScopedThreadRef } from "@t3tools/contracts";
 import {
@@ -565,7 +566,7 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
     <Dialog open={props.open} onOpenChange={handleOpenChange}>
       <WizardPopup>
         <WizardHeader
-          title="Publish repository"
+          title={t("Publish repository")}
           description="Pick where to host it, then point us at a repo to push to."
         >
           <WizardSteps
@@ -627,8 +628,8 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
                           }
                         />
                         <TooltipPopup side="top" align="end" className="max-w-72">
-                          {readiness.hint ??
-                            "Open Settings -> Source Control to configure this provider."}
+                          {tNode(readiness.hint) ??
+                            t("Open Settings -> Source Control to configure this provider.")}
                         </TooltipPopup>
                       </Tooltip>
                     </div>
@@ -766,12 +767,12 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
               {publishAdvancedOpen ? (
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   <label className="space-y-1.5" htmlFor="publish-remote-name">
-                    <span className="text-xs font-medium text-foreground">Remote</span>
+                    <span className="text-xs font-medium text-foreground">{t("Remote")}</span>
                     <Input
                       id="publish-remote-name"
                       value={publishRemoteName}
                       onChange={(event) => setPublishRemoteName(event.target.value)}
-                      placeholder="origin"
+                      placeholder={t("origin")}
                       disabled={publishRepositoryAction.isPending}
                     />
                   </label>
@@ -827,7 +828,7 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
                 role="alert"
                 className="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-xs text-destructive"
               >
-                <p className="font-medium">Publish failed</p>
+                <p className="font-medium">{t("Publish failed")}</p>
                 <p className="mt-0.5 text-destructive/90">{publishError}</p>
               </div>
             ) : null}
@@ -878,7 +879,7 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
 
         <WizardFooter>
           {publishWizardStep === 2 ? (
-            <Button onClick={() => handleOpenChange(false)}>Done</Button>
+            <Button onClick={() => handleOpenChange(false)}>{t("Done")}</Button>
           ) : (
             <>
               <Button
@@ -1114,7 +1115,7 @@ export default function GitActionsControl({
     [gitStatusForActions, hasPrimaryRemote, isDefaultRef, isGitActionRunning],
   );
   const quickActionDisabledReason = quickAction.disabled
-    ? (quickAction.hint ?? "This action is currently unavailable.")
+    ? (tNode(quickAction.hint) ?? t("This action is currently unavailable."))
     : null;
   const pendingDefaultBranchActionCopy = pendingDefaultBranchAction
     ? resolveDefaultBranchActionDialogCopy({
@@ -1532,7 +1533,7 @@ export default function GitActionsControl({
       toastManager.add({
         type: "info",
         title: quickAction.label,
-        description: quickAction.hint,
+        description: tNode(quickAction.hint),
         data: threadToastData,
       });
       return;
@@ -1640,7 +1641,7 @@ export default function GitActionsControl({
           </span>
         </Button>
       ) : (
-        <Group aria-label="Git actions" className="shrink-0">
+        <Group aria-label={t("Git actions")} className="shrink-0">
           {quickActionDisabledReason ? (
             <Popover>
               <PopoverTrigger
@@ -1659,7 +1660,7 @@ export default function GitActionsControl({
                   SourceControlIcon={SourceControlIcon}
                 />
                 <span className="sr-only @3xl/header-actions:not-sr-only @3xl/header-actions:ml-0.5">
-                  {quickAction.label}
+                  {t(quickAction.label)}
                 </span>
               </PopoverTrigger>
               <PopoverPopup tooltipStyle side="bottom" align="start">
@@ -1676,7 +1677,7 @@ export default function GitActionsControl({
             >
               <GitQuickActionIcon quickAction={quickAction} SourceControlIcon={SourceControlIcon} />
               <span className="sr-only @3xl/header-actions:not-sr-only @3xl/header-actions:ml-0.5">
-                {quickAction.label}
+                {t(quickAction.label)}
               </span>
             </Button>
           )}
@@ -1689,7 +1690,9 @@ export default function GitActionsControl({
             }}
           >
             <MenuTrigger
-              render={<Button aria-label="Git action options" size="icon-xs" variant="outline" />}
+              render={
+                <Button aria-label={t("Git action options")} size="icon-xs" variant="outline" />
+              }
               disabled={isGitActionRunning}
             >
               <ChevronDownIcon aria-hidden="true" className="size-4" />
@@ -1715,7 +1718,7 @@ export default function GitActionsControl({
                             icon={item.icon}
                             SourceControlIcon={SourceControlIcon}
                           />
-                          {item.label}
+                          {t(item.label)}
                         </MenuItem>
                       </PopoverTrigger>
                       <PopoverPopup tooltipStyle side="left" align="center">
@@ -1734,7 +1737,7 @@ export default function GitActionsControl({
                     }}
                   >
                     <GitActionItemIcon icon={item.icon} SourceControlIcon={SourceControlIcon} />
-                    {item.label}
+                    {t(item.label)}
                   </MenuItem>
                 );
               })}
@@ -1791,7 +1794,7 @@ export default function GitActionsControl({
           <DialogPanel className="space-y-4">
             <div className="space-y-3 rounded-xl bg-zinc-25 p-3 text-sm ring-1 ring-black/5 dark:bg-white/[0.035] dark:ring-white/5">
               <div className="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1">
-                <span className="text-muted-foreground">Branch</span>
+                <span className="text-muted-foreground">{t("Branch")}</span>
                 <span className="flex items-center justify-between gap-2">
                   <span className="font-medium">
                     {gitStatusForActions?.refName ?? "(detached HEAD)"}
@@ -1815,7 +1818,7 @@ export default function GitActionsControl({
                         }}
                       />
                     )}
-                    <span className="text-muted-foreground">Files</span>
+                    <span className="text-muted-foreground">{t("Files")}</span>
                     {!allSelected && !isEditingFiles && (
                       <span className="text-muted-foreground">
                         ({selectedFiles.length} of {allFiles.length})
@@ -1872,7 +1875,7 @@ export default function GitActionsControl({
                                 />
                                 <span className="shrink-0">
                                   {isExcluded ? (
-                                    <span className="text-muted-foreground">Excluded</span>
+                                    <span className="text-muted-foreground">{t("Excluded")}</span>
                                   ) : (
                                     <>
                                       <span className="text-success">+{file.insertions}</span>
@@ -1905,7 +1908,7 @@ export default function GitActionsControl({
               <Textarea
                 value={dialogCommitMessage}
                 onChange={(event) => setDialogCommitMessage(event.target.value)}
-                placeholder="Leave empty to auto-generate"
+                placeholder={t("Leave empty to auto-generate")}
                 size="sm"
               />
             </div>
@@ -1957,9 +1960,11 @@ export default function GitActionsControl({
         <DialogPopup className="max-w-xl">
           <DialogHeader>
             <DialogTitle>
-              {pendingDefaultBranchActionCopy?.title ?? "Run action on default refName?"}
+              {t(pendingDefaultBranchActionCopy?.title ?? "Run action on default refName?")}
             </DialogTitle>
-            <DialogDescription>{pendingDefaultBranchActionCopy?.description}</DialogDescription>
+            <DialogDescription>
+              {tNode(pendingDefaultBranchActionCopy?.description)}
+            </DialogDescription>
           </DialogHeader>
           <DialogFooter className="dark:border-transparent dark:bg-transparent sm:flex-wrap sm:items-center">
             <Button

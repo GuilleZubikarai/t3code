@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { EnvironmentId, EnvironmentMachineKind, VcsRef, ProjectId } from "@t3tools/contracts";
 import * as Schema from "effect/Schema";
 import { toSortableTimestamp } from "../lib/threadSort";
@@ -38,7 +39,7 @@ export function resolveEnvironmentOptionLabel(input: {
       if (!label) return false;
       return !GENERIC_LOCAL_ENVIRONMENT_LABELS.has(label.toLowerCase());
     });
-    return preferredLocalLabel ?? "This device";
+    return preferredLocalLabel ?? t("This device");
   }
 
   return runtimeLabel ?? savedLabel ?? input.environmentId;
@@ -83,15 +84,15 @@ export function resolveContextStripLabelsCompact(input: {
 }
 
 export function resolveEnvModeLabel(mode: EnvMode): string {
-  return mode === "worktree" ? "New worktree" : "Current checkout";
+  return mode === "worktree" ? t("New worktree") : t("Current checkout");
 }
 
 export function resolveCurrentWorkspaceLabel(activeWorktreePath: string | null): string {
-  return activeWorktreePath ? "Current worktree" : resolveEnvModeLabel("local");
+  return activeWorktreePath ? t("Current worktree") : resolveEnvModeLabel("local");
 }
 
 export function resolveLockedWorkspaceLabel(activeWorktreePath: string | null): string {
-  return activeWorktreePath ? "Worktree" : "Local checkout";
+  return activeWorktreePath ? t("Worktree") : t("Local checkout");
 }
 
 export interface PreviousWorktreeSeed {
@@ -138,7 +139,7 @@ export function resolvePreviousWorktreeSeed(input: {
 }
 
 export function resolvePreviousWorktreeLabel(seed: PreviousWorktreeSeed): string {
-  return seed.branch ? `Previous worktree (${seed.branch})` : "Previous worktree";
+  return seed.branch ? `${t("Previous worktree")} (${seed.branch})` : t("Previous worktree");
 }
 
 export function resolveEffectiveEnvMode(input: {
@@ -199,7 +200,7 @@ export function resolveBranchTriggerLabel(input: {
     startFromOrigin,
   } = input;
   if (!resolvedActiveBranch) {
-    return "Select ref";
+    return t("Select ref");
   }
   if (effectiveEnvMode === "worktree" && !activeWorktreePath) {
     const baseRef =

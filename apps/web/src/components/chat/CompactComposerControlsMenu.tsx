@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { ProviderInteractionMode, RuntimeMode } from "@t3tools/contracts";
 import { memo, type ReactNode } from "react";
 import { EllipsisIcon } from "lucide-react";
@@ -39,7 +40,7 @@ export const CompactComposerControlsMenu = memo(function CompactComposerControls
             size={size}
             variant="ghost"
             className={size === "xs" ? "shrink-0" : "shrink-0 px-2"}
-            aria-label="More composer controls"
+            aria-label={t("More composer controls")}
           />
         }
       >

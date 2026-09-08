@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { scopedThreadKey, scopeThreadRef } from "@t3tools/client-runtime/environment";
 import { pullRequestDetailToVcsStatus } from "@t3tools/client-runtime/state/pull-requests";
 import {
@@ -232,7 +233,7 @@ export function ThreadStatusLabel({
         <TooltipTrigger
           render={
             <span
-              aria-label={status.label}
+              aria-label={t(status.label)}
               className={`inline-flex size-3.5 shrink-0 items-center justify-center ${status.colorClass}`}
             />
           }
@@ -243,7 +244,7 @@ export function ThreadStatusLabel({
             }`}
           />
         </TooltipTrigger>
-        <TooltipPopup side="top">{status.label}</TooltipPopup>
+        <TooltipPopup side="top">{t(status.label)}</TooltipPopup>
       </Tooltip>
     );
   }
@@ -253,7 +254,7 @@ export function ThreadStatusLabel({
       <TooltipTrigger
         render={
           <span
-            aria-label={status.label}
+            aria-label={t(status.label)}
             className={`inline-flex items-center gap-1 text-[10px] ${status.colorClass}`}
           />
         }
@@ -263,9 +264,9 @@ export function ThreadStatusLabel({
             status.pulse ? "animate-status-pulse" : ""
           }`}
         />
-        <span className="hidden md:inline">{status.label}</span>
+        <span className="hidden md:inline">{t(status.label)}</span>
       </TooltipTrigger>
-      <TooltipPopup side="top">{status.label}</TooltipPopup>
+      <TooltipPopup side="top">{t(status.label)}</TooltipPopup>
     </Tooltip>
   );
 }

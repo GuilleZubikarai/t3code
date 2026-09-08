@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type {
   ContextMenuItem,
   EnvironmentId,
@@ -202,7 +203,7 @@ export function tabMuteMenuItem(input: {
 }): { label: string; disabled: boolean } {
   const muted = input.overlay?.audioMuted ?? false;
   return {
-    label: muted ? "Unmute tab" : "Mute tab",
+    label: muted ? t("Unmute tab") : t("Mute tab"),
     disabled: input.overlay === null || !input.canResolveRuntimeTabId,
   };
 }
@@ -465,7 +466,7 @@ function RightPanelEmptyState(props: {
       ref={focusOnMount}
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      aria-label="Open a surface"
+      aria-label={t("Open a surface")}
       data-surface-launcher-keys={availableActions.map((action) => action.shortcut).join("")}
       className={cn(
         "flex min-h-0 flex-1 items-center justify-center overflow-y-auto px-6 pt-6 outline-none",
@@ -476,9 +477,9 @@ function RightPanelEmptyState(props: {
     >
       <div className="relative w-full max-w-lg">
         <div className="absolute inset-x-0 bottom-full mb-5 text-center">
-          <h3 className="font-medium text-foreground text-sm">Open a surface</h3>
+          <h3 className="font-medium text-foreground text-sm">{t("Open a surface")}</h3>
           <p className="mt-1 text-muted-foreground text-xs">
-            Choose what to show in the right panel.
+            {t("Choose what to show in the right panel.")}
           </p>
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -513,10 +514,10 @@ function RightPanelEmptyState(props: {
                   <Kbd className="absolute top-3 right-3">{action.shortcut}</Kbd>
                   <span className="flex items-center gap-2 pe-8">
                     {actionIcon(action)}
-                    <span className="font-medium text-sm">{action.label}</span>
+                    <span className="font-medium text-sm">{t(action.label)}</span>
                   </span>
                   <span className="mt-1.5 text-muted-foreground text-xs leading-relaxed">
-                    {action.description}
+                    {t(action.description)}
                   </span>
                 </button>
                 {/*
@@ -529,7 +530,7 @@ function RightPanelEmptyState(props: {
                     <MenuTrigger
                       render={
                         <Button
-                          aria-label="Open browser in a profile"
+                          aria-label={t("Open browser in a profile")}
                           className="absolute right-3 bottom-3 [--control-icon-color:currentColor]"
                           size="icon-xs"
                           variant="ghost-muted"
@@ -567,10 +568,10 @@ function RightPanelEmptyState(props: {
                 <Kbd className="absolute top-3 right-3">{action.shortcut}</Kbd>
                 <span className="flex items-center gap-2 pe-8">
                   {actionIcon(action)}
-                  <span className="font-medium text-sm">{action.label}</span>
+                  <span className="font-medium text-sm">{t(action.label)}</span>
                 </span>
                 <span className="mt-1.5 text-muted-foreground text-xs leading-relaxed">
-                  {action.disabledReason}
+                  {t(action.disabledReason)}
                 </span>
               </div>
             ),
@@ -588,9 +589,9 @@ function surfaceTitle(
 ): string {
   switch (surface.kind) {
     case "diff":
-      return "Diff";
+      return t("Diff");
     case "files":
-      return "Files";
+      return t("Files");
     case "file":
       return surface.relativePath.slice(
         Math.max(surface.relativePath.lastIndexOf("/"), surface.relativePath.lastIndexOf("\\")) + 1,
@@ -603,15 +604,15 @@ function surfaceTitle(
     case "pull-request":
       return `#${surface.number}`;
     case "agents":
-      return "Agents";
+      return t("Agents");
     case "preview": {
       const snapshot = surface.resourceId ? sessions[surface.resourceId] : null;
-      if (!snapshot || snapshot.navStatus._tag === "Idle") return "Browser";
+      if (!snapshot || snapshot.navStatus._tag === "Idle") return t("Browser");
       if (snapshot.navStatus.title.trim().length > 0) return snapshot.navStatus.title;
       try {
-        return new URL(snapshot.navStatus.url).host || "Browser";
+        return new URL(snapshot.navStatus.url).host || t("Browser");
       } catch {
-        return "Browser";
+        return t("Browser");
       }
     }
   }
@@ -1103,7 +1104,7 @@ export function RightPanelTabs(props: RightPanelTabsProps) {
                 <MenuTrigger
                   render={
                     <Button
-                      aria-label="Add panel surface"
+                      aria-label={t("Add panel surface")}
                       className="size-6 shrink-0 text-muted-foreground hover:text-foreground"
                       size="icon-xs"
                       variant="ghost"
@@ -1149,7 +1150,7 @@ export function RightPanelTabs(props: RightPanelTabsProps) {
                             }}
                           >
                             <Icon />
-                            {action.label}
+                            {t(action.label)}
                             <MenuShortcut>{action.shortcut}</MenuShortcut>
                           </MenuSubTrigger>
                           {/*
@@ -1174,12 +1175,12 @@ export function RightPanelTabs(props: RightPanelTabsProps) {
                       <SurfaceMenuItem
                         key={action.label}
                         available={action.available}
-                        disabledReason={action.disabledReason}
+                        disabledReason={t(action.disabledReason)}
                         shortcut={action.shortcut}
                         onClick={action.onClick}
                       >
                         <Icon />
-                        {action.label}
+                        {t(action.label)}
                       </SurfaceMenuItem>
                     );
                   })}
@@ -1192,14 +1193,14 @@ export function RightPanelTabs(props: RightPanelTabsProps) {
           <div
             className="flex shrink-0 items-center gap-0.5 [-webkit-app-region:no-drag]"
             role="group"
-            aria-label="Scroll panel tabs"
+            aria-label={t("Scroll panel tabs")}
           >
             <Tooltip>
               <TooltipTrigger
                 render={
                   <span className="inline-flex">
                     <Button
-                      aria-label="Scroll tabs left"
+                      aria-label={t("Scroll tabs left")}
                       disabled={!tabScrollState.canScrollLeft}
                       onClick={() => scrollTabs(-1)}
                       size="icon-xs"
@@ -1210,14 +1211,14 @@ export function RightPanelTabs(props: RightPanelTabsProps) {
                   </span>
                 }
               />
-              <TooltipPopup>Scroll tabs left</TooltipPopup>
+              <TooltipPopup>{t("Scroll tabs left")}</TooltipPopup>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger
                 render={
                   <span className="inline-flex">
                     <Button
-                      aria-label="Scroll tabs right"
+                      aria-label={t("Scroll tabs right")}
                       disabled={!tabScrollState.canScrollRight}
                       onClick={() => scrollTabs(1)}
                       size="icon-xs"
@@ -1228,7 +1229,7 @@ export function RightPanelTabs(props: RightPanelTabsProps) {
                   </span>
                 }
               />
-              <TooltipPopup>Scroll tabs right</TooltipPopup>
+              <TooltipPopup>{t("Scroll tabs right")}</TooltipPopup>
             </Tooltip>
           </div>
         ) : null}

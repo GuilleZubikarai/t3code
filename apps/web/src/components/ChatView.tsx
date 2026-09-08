@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { useLoadBalancedEnvironment } from "../hooks/useLoadBalancedEnvironment";
 import type { UsageLimitSourceSnapshots } from "@t3tools/contracts";
 import {
@@ -7056,10 +7057,10 @@ export default function ChatView(props: ChatViewProps) {
               toastManager.add(
                 stackedThreadToast({
                   type: "success",
-                  title: "Started in background",
+                  title: t("Started in background"),
                   timeout: 5_000,
                   actionProps: {
-                    children: "Open",
+                    children: t("Open"),
                     onClick: () => {
                       void navigate({
                         to: "/$environmentId/$threadId",

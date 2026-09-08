@@ -28,6 +28,7 @@ export function LanguageSettingsSection() {
             onValueChange={(value) => {
               if (typeof value === "string" && isLocalePreference(value)) {
                 setLocalePreference(value);
+                window.location.reload();
               }
             }}
           >
