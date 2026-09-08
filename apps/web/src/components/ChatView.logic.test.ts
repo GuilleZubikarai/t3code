@@ -57,6 +57,7 @@ import {
   resolveProactiveTurnDiffAction,
   resolveThreadMetadataUpdateForNextTurn,
   resolveSendEnvMode,
+  threadShellHasStarted,
   resolveDraftHeroState,
   scheduleEnvironmentReconnectWarning,
   startNewThreadForProject,
@@ -1979,5 +1980,38 @@ describe("checkout Git memory", () => {
     expect(
       recallCheckoutIsRepo(EnvironmentId.make("env-other"), "/repo/shared-path"),
     ).toBeUndefined();
+  });
+});
+
+describe("threadShellHasStarted", () => {
+  it("counts a thread that has a user message but no latest turn", () => {
+    expect(
+      threadShellHasStarted({ latestTurn: null, latestUserMessageAt: now, session: null }),
+    ).toBe(true);
+  });
+
+  it("counts a thread with a live session and nothing else", () => {
+    expect(
+      threadShellHasStarted({
+        latestTurn: null,
+        latestUserMessageAt: null,
+        session: {
+          threadId,
+          status: "starting",
+          providerName: "codex",
+          runtimeMode: "full-access",
+          activeTurnId: null,
+          lastError: null,
+          updatedAt: now,
+        },
+      }),
+    ).toBe(true);
+  });
+
+  it("does not count a thread that never sent anything", () => {
+    expect(
+      threadShellHasStarted({ latestTurn: null, latestUserMessageAt: null, session: null }),
+    ).toBe(false);
+    expect(threadShellHasStarted(null)).toBe(false);
   });
 });
