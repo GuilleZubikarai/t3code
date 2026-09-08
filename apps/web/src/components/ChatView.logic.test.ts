@@ -1981,6 +1981,11 @@ describe("checkout Git memory", () => {
       recallCheckoutIsRepo(EnvironmentId.make("env-other"), "/repo/shared-path"),
     ).toBeUndefined();
   });
+
+  it("does not confuse an environment id containing the separator with a path", () => {
+    rememberCheckoutIsRepo(EnvironmentId.make("env"), "a:b", false);
+    expect(recallCheckoutIsRepo(EnvironmentId.make("env:a"), "b")).toBeUndefined();
+  });
 });
 
 describe("threadShellHasStarted", () => {

@@ -801,7 +801,7 @@ export function isBranchMismatchDismissedForSession(key: string | null): boolean
 const sessionCheckoutIsRepo = new Map<string, boolean>();
 
 function checkoutIsRepoKey(environmentId: EnvironmentId, cwd: string): string {
-  return `${environmentId}:${cwd}`;
+  return JSON.stringify([environmentId, cwd]);
 }
 
 export function rememberCheckoutIsRepo(

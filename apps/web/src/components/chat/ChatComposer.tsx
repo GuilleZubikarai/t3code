@@ -1913,7 +1913,9 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
     meterEnabled: settings.contextWindowMeterEnabled,
     detailLoading: props.threadSyncPhase === "loading",
     threadStarted: threadShellHasStarted(props.activeThreadShell),
-    providerReportsContextWindow: selectedProviderStatus?.reportsContextWindow === true,
+    providerReportsContextWindow: selectedProviderStatus
+      ? selectedProviderStatus.reportsContextWindow === true
+      : null,
   });
 
   // ------------------------------------------------------------------

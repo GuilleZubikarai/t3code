@@ -262,6 +262,15 @@ describe("shouldReserveContextWindowMeter", () => {
     );
   });
 
+  it("reserves while the thread's provider is not in the catalog yet", () => {
+    expect(
+      shouldReserveContextWindowMeter({
+        ...loadingStartedThread,
+        providerReportsContextWindow: null,
+      }),
+    ).toBe(true);
+  });
+
   it("reserves nothing for a provider that does not stream usage", () => {
     expect(
       shouldReserveContextWindowMeter({
