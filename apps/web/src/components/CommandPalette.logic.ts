@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   type FilesystemBrowseEntry,
   type KeybindingCommand,
@@ -475,12 +476,12 @@ export function buildRootGroups(input: {
 export function getCommandPaletteInputPlaceholder(mode: CommandPaletteMode): string {
   switch (mode) {
     case "root":
-      return "Search commands, projects, and threads...";
+      return t("Search commands, projects, and threads...");
     case "root-browse":
-      return "Enter project path (e.g. ~/projects/my-app)";
+      return t("Enter project path (e.g. ~/projects/my-app)");
     case "submenu":
-      return "Search...";
+      return t("Search...");
     case "submenu-browse":
-      return "Enter path (e.g. ~/projects/my-app)";
+      return t("Enter path (e.g. ~/projects/my-app)");
   }
 }

@@ -1,4 +1,5 @@
 import { isElectron } from "~/env";
+import { t } from "~/i18n/t";
 import { isMacPlatform, isWindowsPlatform, normalizeSearchText } from "~/lib/utils";
 
 export type SettingsPath =
@@ -74,6 +75,12 @@ export const SETTINGS_SEARCH_ITEMS = [
     searchTerms: [
       "model workspace browser machines projects inheritance automatic pull checkout grouping actions scripts",
     ],
+  },
+  {
+    id: "app-language",
+    title: "Language",
+    to: "/settings/general",
+    searchTerms: ["idioma español spanish english locale translation"],
   },
   {
     id: "color-scheme",
@@ -619,7 +626,9 @@ export function searchSettings(
       const title = normalizeSearchText(item.title);
       const fields = [
         title,
+        normalizeSearchText(t(item.title)),
         normalizeSearchText(SETTINGS_SECTION_LABELS[item.to]),
+        normalizeSearchText(t(SETTINGS_SECTION_LABELS[item.to])),
         ...(item.searchTerms ?? []).map(normalizeSearchText),
       ];
       if (!queryTokens.every((token) => fields.some((field) => field.includes(token)))) return [];

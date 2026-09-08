@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 
+import { t } from "../../i18n/t";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Kbd } from "../ui/kbd";
@@ -245,8 +246,8 @@ export function SettingsSidebarNav({ pathname }: { pathname: string }) {
                 setActiveResultIndex(0);
               }}
               onKeyDown={handleSearchKeyDown}
-              placeholder="Search"
-              aria-label="Search settings"
+              placeholder={t("Search")}
+              aria-label={t("Search settings")}
               role="combobox"
               aria-autocomplete="list"
               aria-expanded={isSearching && hasResults}
@@ -264,7 +265,7 @@ export function SettingsSidebarNav({ pathname }: { pathname: string }) {
                 size="icon-micro"
                 variant="ghost"
                 className="shrink-0 text-sidebar-muted-foreground hover:bg-sidebar-control-surface hover:text-sidebar-foreground"
-                aria-label="Clear settings search"
+                aria-label={t("Clear settings search")}
                 onClick={() => {
                   clearSearch();
                   searchInputRef.current?.focus();
@@ -307,10 +308,10 @@ export function SettingsSidebarNav({ pathname }: { pathname: string }) {
                     <SettingsSectionIcon to={item.to} />
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-sm font-medium text-sidebar-foreground">
-                        {item.title}
+                        {t(item.title)}
                       </span>
                       <span className="block truncate text-[11px] text-sidebar-muted-foreground/75">
-                        {SETTINGS_SECTION_LABELS[item.to]}
+                        {t(SETTINGS_SECTION_LABELS[item.to])}
                       </span>
                     </span>
                   </SidebarMenuButton>
@@ -329,7 +330,7 @@ export function SettingsSidebarNav({ pathname }: { pathname: string }) {
                       onClick={() => handleSectionClick(item.to)}
                     >
                       <Icon />
-                      <span className="truncate">{item.label}</span>
+                      <span className="truncate">{t(item.label)}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );

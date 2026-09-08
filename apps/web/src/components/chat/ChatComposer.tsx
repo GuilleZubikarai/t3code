@@ -57,6 +57,7 @@ import {
   replaceTextRange,
 } from "../../composer-logic";
 import { DISCONNECTED_COMPOSER_PLACEHOLDER } from "../../composerPlaceholder";
+import { t } from "../../i18n/t";
 import {
   deriveComposerSendState,
   getAntigravitySendBlockReason,
@@ -1075,7 +1076,7 @@ const ComposerFooterModeControls = memo(function ComposerFooterModeControls(prop
               <ComposerSelectControl
                 size={size}
                 className={size === "xs" ? undefined : "font-medium"}
-                aria-label="Runtime mode"
+                aria-label={t("Runtime mode")}
               />
             }
           >
@@ -5103,7 +5104,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                               )}
                               onPointerDown={(event) => event.preventDefault()}
                               onClick={expandMobileComposer}
-                              aria-label="Write custom answer"
+                              aria-label={t("Write custom answer")}
                             >
                               {activePendingProgress?.customAnswer || "Write custom answer"}
                             </button>
@@ -5203,7 +5204,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                   onPointerDown={(event) => event.preventDefault()}
                   onClick={isChoiceOnlyPendingQuestion ? undefined : expandMobileComposer}
                   disabled={isChoiceOnlyPendingQuestion}
-                  aria-label="Expand composer"
+                  aria-label={t("Expand composer")}
                 >
                   {activePendingProgress
                     ? isChoiceOnlyPendingQuestion
@@ -5427,7 +5428,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                                   render={
                                     <span
                                       role="img"
-                                      aria-label="Draft attachment may not persist"
+                                      aria-label={t("Draft attachment may not persist")}
                                       className="absolute left-1 top-1 inline-flex items-center justify-center rounded bg-background/85 p-0.5 text-amber-600"
                                     >
                                       <CircleAlertIcon className="size-3" />
@@ -5724,14 +5725,18 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                           ? "Choose an option above"
                           : "Type your own answer, or leave this blank to use the selected option"
                         : showPlanFollowUpPrompt && activeProposedPlan
-                          ? "Add feedback to refine the plan, or leave this blank to implement it"
+                          ? t(
+                              "Add feedback to refine the plan, or leave this blank to implement it",
+                            )
                           : projectSelectionRequired
-                            ? "Choose a project above to start a thread"
+                            ? t("Choose a project above to start a thread")
                             : showProviderUnavailable
-                              ? "Enable a provider in Settings to send a message"
+                              ? t("Enable a provider in Settings to send a message")
                               : phase === "disconnected"
-                                ? DISCONNECTED_COMPOSER_PLACEHOLDER
-                                : "Ask anything, @tag files/folders, $use skills, or / for commands"
+                                ? t(DISCONNECTED_COMPOSER_PLACEHOLDER)
+                                : t(
+                                    "Ask anything, @tag files/folders, $use skills, or / for commands",
+                                  )
                   }
                   disabled={
                     isConnecting ||
@@ -5835,7 +5840,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                               size="icon-sm"
                               onPointerDown={(event) => event.preventDefault()}
                               onClick={() => attachmentInputRef.current?.click()}
-                              aria-label="Attach files"
+                              aria-label={t("Attach files")}
                             />
                           }
                         >

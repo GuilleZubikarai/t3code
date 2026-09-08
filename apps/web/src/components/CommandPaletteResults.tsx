@@ -14,6 +14,7 @@ import {
   CommandList,
   CommandShortcut,
 } from "./ui/command";
+import { t, tNode } from "~/i18n/t";
 import { cn } from "~/lib/utils";
 
 function foldAsciiCase(value: string): string {
@@ -104,7 +105,7 @@ export function CommandPaletteResults(props: CommandPaletteResultsProps) {
     <CommandList>
       {props.groups.map((group) => (
         <CommandGroup items={group.items} key={group.value}>
-          <CommandGroupLabel className="ps-[9px]">{group.label}</CommandGroupLabel>
+          <CommandGroupLabel className="ps-[9px]">{t(group.label)}</CommandGroupLabel>
           <CommandCollection>
             {(item) =>
               item.disabled ? (
@@ -136,21 +137,21 @@ function DisabledCommandPaletteResultRow(props: {
         <span className="flex min-w-0 flex-1 flex-col">
           <span className="flex min-w-0 items-center gap-1.5 text-sm text-foreground">
             {props.item.titleLeadingContent}
-            <span className="truncate">{props.item.title}</span>
+            <span className="truncate">{tNode(props.item.title)}</span>
           </span>
           {props.item.threadContentMatch ? (
             <ThreadContentMatch match={props.item.threadContentMatch} />
           ) : null}
           {props.item.description ? (
             <span className="min-w-0 text-muted-foreground/70 text-xs">
-              {props.item.description}
+              {tNode(props.item.description)}
             </span>
           ) : null}
         </span>
       ) : (
         <span className="flex min-w-0 flex-1 items-center gap-1.5 text-sm text-foreground">
           {props.item.titleLeadingContent}
-          <span className="truncate">{props.item.title}</span>
+          <span className="truncate">{tNode(props.item.title)}</span>
         </span>
       )}
       {props.item.titleTrailingContent}
@@ -187,21 +188,21 @@ function CommandPaletteResultRow(props: {
         <span className="flex min-w-0 flex-1 flex-col">
           <span className="flex min-w-0 items-center gap-1.5 text-sm text-foreground">
             {props.item.titleLeadingContent}
-            <span className="truncate">{props.item.title}</span>
+            <span className="truncate">{tNode(props.item.title)}</span>
           </span>
           {props.item.threadContentMatch ? (
             <ThreadContentMatch match={props.item.threadContentMatch} />
           ) : null}
           {props.item.description ? (
             <span className="min-w-0 text-muted-foreground/70 text-xs">
-              {props.item.description}
+              {tNode(props.item.description)}
             </span>
           ) : null}
         </span>
       ) : (
         <span className="flex min-w-0 flex-1 items-center gap-1.5 text-sm text-foreground">
           {props.item.titleLeadingContent}
-          <span className="truncate">{props.item.title}</span>
+          <span className="truncate">{tNode(props.item.title)}</span>
         </span>
       )}
       {props.item.titleTrailingContent}
