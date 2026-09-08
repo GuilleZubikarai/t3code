@@ -203,6 +203,7 @@ import { PullRequestDetailGhost } from "./pullRequest/PullRequestGhosts";
 import { PullRequestsUnavailableState } from "./pullRequest/PullRequestsUnavailableState";
 import { RightPanelTabs } from "./RightPanelTabs";
 import { AgentsPanel } from "./AgentsPanel";
+import { useDeviceState } from "~/state/device";
 import {
   deriveAgentPanelModel,
   foldSubagentActivities,
@@ -552,6 +553,9 @@ const PreviewPanel = lazy(() =>
   import("./preview/PreviewPanel").then((module) => ({ default: module.PreviewPanel })),
 );
 const DiffPanel = lazy(() => import("./DiffPanel"));
+const DevicePanel = lazy(() =>
+  import("./device/DevicePanel").then((module) => ({ default: module.DevicePanel })),
+);
 const FilePreviewPanel = lazy(() => import("./files/FilePreviewPanel"));
 const EMPTY_PENDING_FILE_SURFACE_IDS: ReadonlySet<string> = new Set();
 const TYPE_TO_FOCUS_EDITABLE_SELECTOR = [
@@ -4116,6 +4120,26 @@ export default function ChatView(props: ChatViewProps) {
     if (!activeThreadRef) return;
     useRightPanelStore.getState().open(activeThreadRef, "agents");
   }, [activeThreadRef]);
+  const addDeviceSurface = useCallback(() => {
+    if (!activeThreadRef || !isServerThread) return;
+    useRightPanelStore.getState().open(activeThreadRef, "device");
+  }, [activeThreadRef, isServerThread]);
+  // An agent's `device_open` surfaces in every client the same way a
+  // `preview_open` does: the thread gains a device session and the panel
+  // opens on it. Closing the last session leaves the tab in place so the
+  // user keeps their picker; only new sessions raise the panel.
+  const { state: deviceState } = useDeviceState(activeThreadRef?.environmentId ?? null);
+  const threadDeviceSessionCount = activeThreadRef
+    ? deviceState.sessions.filter((session) => session.threadId === activeThreadRef.threadId).length
+    : 0;
+  const previousDeviceSessionCount = useRef(threadDeviceSessionCount);
+  useEffect(() => {
+    const previous = previousDeviceSessionCount.current;
+    previousDeviceSessionCount.current = threadDeviceSessionCount;
+    if (!activeThreadRef || threadDeviceSessionCount <= previous) return;
+    if (shouldUseRightPanelSheet) return;
+    useRightPanelStore.getState().open(activeThreadRef, "device");
+  }, [activeThreadRef, shouldUseRightPanelSheet, threadDeviceSessionCount]);
   const openFileSurface = useCallback(
     (relativePath: string) => {
       if (!activeThreadRef || !activeProject) return;
@@ -8058,6 +8082,15 @@ export default function ChatView(props: ChatViewProps) {
         environmentId={activeThreadRef?.environmentId ?? null}
         threadId={activeThreadRef?.threadId ?? null}
       />
+    ) : renderedRightPanelSurface?.kind === "device" ? (
+      <Suspense fallback={null}>
+        <DevicePanel
+          mode="embedded"
+          threadRef={activeThreadRef}
+          deviceId={null}
+          visible={rightPanelOpen}
+        />
+      </Suspense>
     ) : (renderedRightPanelSurface?.kind === "files" ||
         renderedRightPanelSurface?.kind === "file") &&
       ((activeProject && activeWorkspaceRoot) ||
@@ -8608,12 +8641,14 @@ export default function ChatView(props: ChatViewProps) {
           onAddFiles={addFilesSurface}
           onAddPullRequest={addPullRequestSurface}
           onAddAgents={addAgentsSurface}
+          onAddDevice={addDeviceSurface}
           browserAvailable={isPreviewSupportedInRuntime()}
           terminalAvailable={activeProject !== null}
           diffAvailable={isServerThread && isGitRepo}
           filesAvailable={activeProject !== null}
           pullRequestAvailable={pullRequestSurfaceAvailable}
           agentsAvailable
+          deviceAvailable={isServerThread}
           liveAgentCount={agentPanelModel.liveCount}
         >
           {rightPanelContent}
@@ -8658,12 +8693,14 @@ export default function ChatView(props: ChatViewProps) {
             onAddFiles={addFilesSurface}
             onAddPullRequest={addPullRequestSurface}
             onAddAgents={addAgentsSurface}
+            onAddDevice={addDeviceSurface}
             browserAvailable={isPreviewSupportedInRuntime()}
             terminalAvailable={activeProject !== null}
             diffAvailable={isServerThread && isGitRepo}
             filesAvailable={activeProject !== null}
             pullRequestAvailable={pullRequestSurfaceAvailable}
             agentsAvailable
+            deviceAvailable={isServerThread}
             liveAgentCount={agentPanelModel.liveCount}
           >
             {rightPanelContent}
