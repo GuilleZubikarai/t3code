@@ -108,3 +108,26 @@ export function formatContextWindowCompactionMessage(
     ? `Context for ${modelDisplayName} compacts automatically when needed.`
     : "Context compacts automatically when needed.";
 }
+
+/**
+ * Whether the footer should hold the meter's slot before a snapshot exists.
+ *
+ * The snapshot comes from thread activities, which load after the shell.
+ * Reserving the slot while the detail loads, for a started thread on a
+ * provider that streams usage, keeps the attach button still until the meter
+ * mounts. Once the detail is in, a missing snapshot means there is no usage
+ * to show and nothing is reserved.
+ */
+export function shouldReserveContextWindowMeter(input: {
+  readonly meterEnabled: boolean;
+  readonly detailLoading: boolean;
+  readonly threadStarted: boolean;
+  readonly providerReportsContextWindow: boolean;
+}): boolean {
+  return (
+    input.meterEnabled &&
+    input.detailLoading &&
+    input.threadStarted &&
+    input.providerReportsContextWindow
+  );
+}
