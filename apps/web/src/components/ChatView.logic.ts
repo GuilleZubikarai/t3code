@@ -816,7 +816,9 @@ export function recallCheckoutIsRepo(
   environmentId: EnvironmentId,
   cwd: string | null,
 ): boolean | undefined {
-  return cwd === null ? undefined : sessionCheckoutIsRepo.get(checkoutIsRepoKey(environmentId, cwd));
+  return cwd === null
+    ? undefined
+    : sessionCheckoutIsRepo.get(checkoutIsRepoKey(environmentId, cwd));
 }
 
 export function threadHasStarted(thread: Thread | null | undefined): boolean {

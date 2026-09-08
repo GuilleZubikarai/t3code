@@ -1976,6 +1976,8 @@ describe("checkout Git memory", () => {
 
   it("keeps environments apart", () => {
     rememberCheckoutIsRepo(environmentId, "/repo/shared-path", false);
-    expect(recallCheckoutIsRepo(EnvironmentId.make("env-other"), "/repo/shared-path")).toBeUndefined();
+    expect(
+      recallCheckoutIsRepo(EnvironmentId.make("env-other"), "/repo/shared-path"),
+    ).toBeUndefined();
   });
 });

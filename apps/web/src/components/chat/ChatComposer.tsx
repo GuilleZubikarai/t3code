@@ -1720,10 +1720,12 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
   const selectedInstanceId =
     selectedProviderEntry?.instanceId ?? NO_PROVIDER_MODEL_SELECTION.instanceId;
   const noProviderAvailable = selectedProviderEntry === undefined;
-  // Before the catalog arrives, every thread resolves to "no provider". The
-  // footer keeps the picker's shape with the thread's own selection instead
-  // of swapping in the setup button and back.
+  // Before the catalog arrives, every thread resolves to "no provider". Send
+  // stays blocked either way; only the chrome waits, keeping the picker with
+  // the thread's own selection instead of swapping in the setup button and
+  // back once the catalog lands.
   const providerCatalogPending = noProviderAvailable && !providerCatalogKnown;
+  const showProviderUnavailable = noProviderAvailable && !providerCatalogPending;
   const providerSetupInstanceId = noProviderAvailable
     ? (unavailableProviderInstanceId ??
       (lockedProvider === null
@@ -4106,21 +4108,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
   const hiddenRestingBlockIds = restingBlockDefs
     .slice(restingBlockDefs.length - restingHiddenBlockCount)
     .map((def) => def.id);
-  const composerControls = providerCatalogPending ? (
-    <ProviderModelPicker
-      isComposerOwned
-      disabled
-      compact={composerControlsCompact}
-      activeInstanceId={activeThreadModelSelection?.instanceId ?? selectedInstanceId}
-      model={activeThreadModelSelection?.model ?? selectedModelForPickerWithCustomFallback}
-      lockedProvider={lockedProvider}
-      instanceEntries={providerInstanceEntries}
-      modelOptionsByInstance={modelOptionsByInstance}
-      size={composerControlsInStrip ? "xs" : "sm"}
-      triggerClassName={composerControlsInStrip ? "min-w-13 shrink text-xs!" : "-ms-2.5"}
-      onInstanceModelChange={onProviderModelSelect}
-    />
-  ) : noProviderAvailable ? (
+  const composerControls = showProviderUnavailable ? (
     <Button
       type="button"
       size="sm"
@@ -4149,8 +4137,17 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       <ProviderModelPicker
         isComposerOwned
         compact={composerControlsCompact}
-        activeInstanceId={selectedInstanceId}
-        model={selectedModelForPickerWithCustomFallback}
+        disabled={providerCatalogPending}
+        activeInstanceId={
+          providerCatalogPending
+            ? (activeThreadModelSelection?.instanceId ?? selectedInstanceId)
+            : selectedInstanceId
+        }
+        model={
+          providerCatalogPending
+            ? (activeThreadModelSelection?.model ?? selectedModelForPickerWithCustomFallback)
+            : selectedModelForPickerWithCustomFallback
+        }
         lockedProvider={lockedProvider}
         lockedContinuationGroupKey={lockedContinuationGroupKey}
         instanceEntries={providerInstanceEntries}
@@ -5204,7 +5201,9 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                       : activePendingProgress.customAnswer ||
                         "Type your own answer, or leave this blank to use the selected option"
                     : prompt.trim() ||
-                      (noProviderAvailable ? "Enable a provider in Settings" : "Ask anything...")}
+                      (showProviderUnavailable
+                        ? "Enable a provider in Settings"
+                        : "Ask anything...")}
                 </button>
                 {collapsedComposerImagePreviews}
                 <button
@@ -5718,7 +5717,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                           ? "Add feedback to refine the plan, or leave this blank to implement it"
                           : projectSelectionRequired
                             ? "Choose a project above to start a thread"
-                            : noProviderAvailable
+                            : showProviderUnavailable
                               ? "Enable a provider in Settings to send a message"
                               : phase === "disconnected"
                                 ? DISCONNECTED_COMPOSER_PLACEHOLDER

@@ -251,15 +251,15 @@ describe("shouldReserveContextWindowMeter", () => {
   });
 
   it("reserves nothing once the detail is in", () => {
-    expect(
-      shouldReserveContextWindowMeter({ ...loadingStartedThread, detailLoading: false }),
-    ).toBe(false);
+    expect(shouldReserveContextWindowMeter({ ...loadingStartedThread, detailLoading: false })).toBe(
+      false,
+    );
   });
 
   it("reserves nothing for a thread that never ran a turn", () => {
-    expect(
-      shouldReserveContextWindowMeter({ ...loadingStartedThread, threadStarted: false }),
-    ).toBe(false);
+    expect(shouldReserveContextWindowMeter({ ...loadingStartedThread, threadStarted: false })).toBe(
+      false,
+    );
   });
 
   it("reserves nothing for a provider that does not stream usage", () => {
