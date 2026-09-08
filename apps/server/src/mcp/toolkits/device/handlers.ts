@@ -210,5 +210,3 @@ export const DeviceStandardToolkitHandlersLive = DeviceStandardToolkit.toLayer(s
 export const DeviceScreenshotToolkitHandlersLive = DeviceScreenshotToolkit.toLayer({
   device_screenshot,
 });
-
-export const DeviceToolkitHandlersLive = DeviceToolkit.toLayer(handlers);
