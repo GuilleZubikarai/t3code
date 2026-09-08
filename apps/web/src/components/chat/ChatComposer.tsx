@@ -3873,7 +3873,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
     isStashMenuOpen ||
     isDragOverComposer ||
     isPreparingWorktree ||
-    noProviderAvailable ||
+    showProviderUnavailable ||
     projectSelectionRequired ||
     environmentUnavailable !== null ||
     composerSubmissionError !== null ||
