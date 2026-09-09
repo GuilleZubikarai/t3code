@@ -31,6 +31,6 @@ Tras un rebase automático, actualiza tu copia local con `git pull --rebase orig
 
 ## Limitaciones
 
-- Las builds no están firmadas. En macOS, la primera vez hay que permitir la app en Ajustes del Sistema → Privacidad y seguridad, y la actualización automática no puede instalarse sola: la app avisa de la versión nueva y hay que descargar el DMG.
+- Las builds de macOS van firmadas y notarizadas con el Developer ID del fork (secretos `CSC_LINK`, `CSC_KEY_PASSWORD`, `APPLE_API_KEY`, `APPLE_API_KEY_ID`, `APPLE_API_ISSUER`). Sin esos secretos el workflow compila igual, pero sin firma y sin actualización automática en macOS. El certificado caduca en junio de 2031.
 - Sin Windows por ahora. Sin T3 Connect (requiere claves del relay oficial).
 - Solo está traducida la app web y de escritorio, no la app móvil.

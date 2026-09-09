@@ -3868,7 +3868,11 @@ const buildDesktopArtifact = Effect.fn("buildDesktopArtifact")(function* (
       delete buildEnv[key];
     }
   }
-  if (!options.signed) {
+  // Fork: T3CODE_DESKTOP_KEEP_CSC=1 lets electron-builder sign with CSC_LINK
+  // (and notarize when APPLE_API_* are set) without upstream's passkey
+  // provisioning pipeline. Squirrel.Mac refuses unsigned updates, so this is
+  // what makes desktop auto-update work for the fork's builds.
+  if (!options.signed && buildEnv.T3CODE_DESKTOP_KEEP_CSC !== "1") {
     buildEnv.CSC_IDENTITY_AUTO_DISCOVERY = "false";
     delete buildEnv.CSC_LINK;
     delete buildEnv.CSC_KEY_PASSWORD;

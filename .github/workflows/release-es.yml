@@ -141,8 +141,27 @@ jobs:
       - name: Align package versions
         run: node scripts/update-release-package-versions.ts "${{ needs.preflight.outputs.version }}"
 
+      # macOS: signs with the Developer ID certificate stored in CSC_LINK so the
+      # desktop updater (Squirrel.Mac) can install updates. Notarizes too when
+      # APPLE_API_KEY, APPLE_API_KEY_ID and APPLE_API_ISSUER are configured.
       - name: Build desktop artifact
+        env:
+          CSC_LINK: ${{ matrix.platform == 'mac' && secrets.CSC_LINK || '' }}
+          CSC_KEY_PASSWORD: ${{ matrix.platform == 'mac' && secrets.CSC_KEY_PASSWORD || '' }}
+          APPLE_API_KEY: ${{ matrix.platform == 'mac' && secrets.APPLE_API_KEY || '' }}
+          APPLE_API_KEY_ID: ${{ matrix.platform == 'mac' && secrets.APPLE_API_KEY_ID || '' }}
+          APPLE_API_ISSUER: ${{ matrix.platform == 'mac' && secrets.APPLE_API_ISSUER || '' }}
         run: |
+          if [[ "${{ matrix.platform }}" == "mac" && -n "$CSC_LINK" ]]; then
+            export T3CODE_DESKTOP_KEEP_CSC=1
+            echo "macOS signing enabled (CSC_LINK)."
+          fi
+          if [[ -n "$APPLE_API_KEY" ]]; then
+            key_path="$RUNNER_TEMP/AuthKey_${APPLE_API_KEY_ID}.p8"
+            printf '%s' "$APPLE_API_KEY" > "$key_path"
+            export APPLE_API_KEY="$key_path"
+            echo "macOS notarization enabled."
+          fi
           vp run dist:desktop:artifact \
             --platform "${{ matrix.platform }}" \
             --target "${{ matrix.target }}" \
