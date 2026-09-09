@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { InfoIcon } from "lucide-react";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 
@@ -179,7 +180,7 @@ export function ComposerBannerStack({ className, items }: ComposerBannerStackPro
               <ComposerBanner.Peek
                 ref={peekRef}
                 variant={firstStackedItem.variant}
-                aria-label="Show other notices"
+                aria-label={t("Show other notices")}
                 aria-expanded={stackExpanded}
                 aria-controls={expandedItemsId}
                 aria-hidden={stackExpanded || undefined}
@@ -196,7 +197,7 @@ export function ComposerBannerStack({ className, items }: ComposerBannerStackPro
               id={expandedItemsId}
               ref={expandedItemsRef}
               role="group"
-              aria-label="Other notices"
+              aria-label={t("Other notices")}
               tabIndex={-1}
               data-composer-banner-stack-expanded-items="true"
               className={cn(
@@ -295,7 +296,7 @@ function ComposerBannerStackAlert({
                     <Button
                       size="icon-xs"
                       variant="ghost"
-                      aria-label="Show notice details"
+                      aria-label={t("Show notice details")}
                       className="hidden flex-none text-muted-foreground hover:text-foreground @max-[400px]:inline-flex"
                     />
                   }

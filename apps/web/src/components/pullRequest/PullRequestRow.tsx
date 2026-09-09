@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { SearchIcon } from "lucide-react";
 import { memo, type RefCallback } from "react";
 
@@ -156,7 +157,7 @@ function PullRequestRowImpl({
                   matched in the description
                 </span>
               </TooltipTrigger>
-              <TooltipPopup side="top">Matched in the description</TooltipPopup>
+              <TooltipPopup side="top">{t("Matched in the description")}</TooltipPopup>
             </Tooltip>
           ) : null}
           <span className="flex shrink-0 items-center gap-1">

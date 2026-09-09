@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { EnvironmentId, ThreadId } from "@t3tools/contracts";
 import { isAtomCommandInterrupted } from "@t3tools/client-runtime/state/runtime";
 import { useDebouncedValue } from "@tanstack/react-pacer";
@@ -264,7 +265,7 @@ export function PullRequestThreadDialog({
             onClick={() => onOpenChange(false)}
             disabled={preparePullRequestThreadAction.isPending}
           >
-            Cancel
+            {t("Cancel")}
           </Button>
           <Button
             type="button"

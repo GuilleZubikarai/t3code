@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 /**
  * The review form floated over the Code tab: how many comments the review is holding, its
  * summary, and the verdict that sends the lot. Hidden entirely on a host that cannot take a
@@ -120,7 +121,7 @@ export function PullRequestReviewBar({
         </span>
         {comments.length > 0 ? (
           <Button size="xs" variant="ghost" disabled={pending} onClick={() => clear(reviewKey)}>
-            Discard
+            {t("Discard")}
           </Button>
         ) : null}
       </div>
@@ -128,8 +129,8 @@ export function PullRequestReviewBar({
         size="sm"
         className="mt-2"
         value={body}
-        placeholder="Summarize your review (optional)"
-        aria-label="Review summary"
+        placeholder={t("Summarize your review (optional)")}
+        aria-label={t("Review summary")}
         onChange={(event) => setSummary(reviewKey, event.target.value)}
       />
       <div className="mt-2 flex flex-wrap justify-end gap-2">

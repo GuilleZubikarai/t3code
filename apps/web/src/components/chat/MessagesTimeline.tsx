@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   type AssistantCitation,
   type EnvironmentId,
@@ -814,7 +815,7 @@ export const MessagesTimeline = memo(function MessagesTimeline({
     }
     return (
       <div className="flex h-full items-center justify-center">
-        <p className="text-placeholder text-sm">Send a message to start the conversation.</p>
+        <p className="text-placeholder text-sm">{t("Send a message to start the conversation.")}</p>
       </div>
     );
   }
@@ -1619,13 +1620,13 @@ function RevertUserMessageButton({ turnCount }: { turnCount: number }) {
             variant="ghost"
             disabled={activity.isRevertingCheckpoint || activity.isWorking}
             onClick={() => ctx.onRevertToTurnCount(turnCount)}
-            aria-label="Revert to this message"
+            aria-label={t("Revert to this message")}
           />
         }
       >
         <Undo2Icon className="size-3" />
       </TooltipTrigger>
-      <TooltipPopup side="top">Revert to this message</TooltipPopup>
+      <TooltipPopup side="top">{t("Revert to this message")}</TooltipPopup>
     </Tooltip>
   );
 }
@@ -1839,7 +1840,7 @@ function ThinkingTimelineRow() {
   return (
     <div className="min-h-7">
       {isPreparingWorktree || isCompacting ? null : (
-        <LiveActivityRow label="Thinking" iconName="brain" active shimmer />
+        <LiveActivityRow label={t("Thinking")} iconName="brain" active shimmer />
       )}
     </div>
   );
@@ -1922,7 +1923,7 @@ const WorkGroupSection = memo(function WorkGroupSection({
   }
 
   return (
-    <section className="-mx-1 space-y-0.5 px-1 py-0.5" aria-label="Activity">
+    <section className="-mx-1 space-y-0.5 px-1 py-0.5" aria-label={t("Activity")}>
       <div className="space-y-px">
         {nonEmptyEntries.map((workEntry) => (
           <SimpleWorkEntryRow
@@ -2068,7 +2069,7 @@ function ExpandedWorkGroupEntries({
         onLayout={updateScrollFades}
         tabIndex={0}
         role="region"
-        aria-label="Tool calls"
+        aria-label={t("Tool calls")}
         data-tool-group-scroll
         className={cn(
           "scrollbar-gutter-stable max-h-[min(18rem,50dvh)] scroll-py-6 overflow-x-hidden rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/70",

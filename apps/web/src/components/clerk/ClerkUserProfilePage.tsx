@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { RefreshIcon } from "~/components/ui/refresh-icon";
 
 import type { ReactNode } from "react";
@@ -57,7 +58,7 @@ export function ClerkUserProfileRefreshButton({
       onClick={onClick}
     >
       <RefreshIcon aria-hidden="true" className="size-3.5" refreshing={isPending} />
-      Refresh
+      {t("Refresh")}
     </Button>
   );
 }

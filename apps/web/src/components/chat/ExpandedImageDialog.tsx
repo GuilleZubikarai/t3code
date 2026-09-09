@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { memo, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeftIcon, ChevronRightIcon, ImageIcon, TextIcon, XIcon } from "lucide-react";
@@ -169,7 +170,7 @@ export const ExpandedImageDialog = memo(function ExpandedImageDialog({
           size="icon-xl"
           variant="overlay"
           className="absolute left-2 top-1/2 z-20 -translate-y-1/2 sm:left-6"
-          aria-label="Previous image"
+          aria-label={t("Previous image")}
           onClick={() => navigateImage(-1)}
         >
           <ChevronLeftIcon className="size-7" />
@@ -255,7 +256,7 @@ export const ExpandedImageDialog = memo(function ExpandedImageDialog({
           size="icon-xl"
           variant="overlay"
           className="absolute right-2 top-1/2 z-20 -translate-y-1/2 sm:right-6"
-          aria-label="Next image"
+          aria-label={t("Next image")}
           onClick={() => navigateImage(1)}
         >
           <ChevronRightIcon className="size-7" />

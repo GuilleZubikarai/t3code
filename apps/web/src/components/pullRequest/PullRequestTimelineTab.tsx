@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type {
   EnvironmentId,
   PullRequestActor,
@@ -170,7 +171,7 @@ function OpenOnHostButton({ url, onOpen }: { url: string | null; onOpen: (url: s
       size="icon-xs"
       variant="ghost"
       className="-mr-1 -mt-1 shrink-0 text-muted-foreground"
-      aria-label="Open activity on host"
+      aria-label={t("Open activity on host")}
       onClick={() => onOpen(url)}
     >
       <ExternalLinkIcon className="size-3" />
@@ -241,7 +242,7 @@ function ConversationCard({
               size="icon-xs"
               variant="ghost"
               className="-mt-1 shrink-0 text-muted-foreground opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
-              aria-label="Edit comment"
+              aria-label={t("Edit comment")}
               onClick={() => setEditing(true)}
             >
               <PencilIcon className="size-3" />
@@ -257,7 +258,7 @@ function ConversationCard({
             cwd={cwd}
             environmentId={reactions.environmentId}
             threadRef={reactions.threadRef}
-            label="Edit comment"
+            label={t("Edit comment")}
             saving={saving}
             onSave={(body) => void save(body)}
             onCancel={() => setEditing(false)}
@@ -630,7 +631,7 @@ export function PullRequestTimelineTab({
         {events.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground">
             <GitPullRequestIcon className="mb-2 size-5" />
-            <p className="text-xs">No activity yet.</p>
+            <p className="text-xs">{t("No activity yet.")}</p>
           </div>
         ) : null}
       </div>

@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { EnvironmentId, ScopedThreadRef } from "@t3tools/contracts";
 import { Globe, History, RadioTower } from "lucide-react";
 
@@ -37,7 +38,7 @@ export function PreviewEmptyState({
         <EmptyMedia variant="icon">
           <Globe className="size-4.5 text-muted-foreground" />
         </EmptyMedia>
-        <EmptyTitle>No preview yet</EmptyTitle>
+        <EmptyTitle>{t("No preview yet")}</EmptyTitle>
         <EmptyDescription>
           Type a URL above, or run a dev script. Browser-ready localhost servers will show up here
           automatically.
@@ -53,7 +54,7 @@ export function PreviewEmptyState({
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <History className="size-4 shrink-0" />
-              <h2 className="font-medium">Recently used</h2>
+              <h2 className="font-medium">{t("Recently used")}</h2>
             </div>
             <div className="flex flex-col divide-y divide-border/60 overflow-hidden rounded-xl border border-border/70 bg-background">
               {recents.map((entry) => (
@@ -72,7 +73,7 @@ export function PreviewEmptyState({
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <RadioTower className="size-4 shrink-0" />
-              <h2 className="font-medium">Local servers</h2>
+              <h2 className="font-medium">{t("Local servers")}</h2>
             </div>
             <div className="flex flex-col divide-y divide-border/60 overflow-hidden rounded-xl border border-border/70 bg-background">
               {servers.map((server) => (
@@ -85,7 +86,7 @@ export function PreviewEmptyState({
               ))}
             </div>
             <p className="px-1 text-xs text-muted-foreground">
-              Select a live local server to open it in this browser tab.
+              {t("Select a live local server to open it in this browser tab.")}
             </p>
           </div>
         ) : null}

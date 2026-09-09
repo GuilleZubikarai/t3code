@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { RotateCwIcon, TriangleAlertIcon } from "lucide-react";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 
@@ -176,7 +177,7 @@ export function MediaVideoPlayer({
       ) : (
         <span
           role="status"
-          aria-label="Loading video"
+          aria-label={t("Loading video")}
           className={cn("block aspect-video w-full rounded-lg bg-muted/60", stateClassName)}
           style={style}
         />

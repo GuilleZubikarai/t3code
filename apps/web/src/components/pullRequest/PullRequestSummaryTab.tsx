@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type {
   EnvironmentId,
   PullRequestActor,
@@ -123,7 +124,7 @@ function CommentBody({
         cwd={editing.cwd}
         environmentId={editing.environmentId}
         threadRef={editing.threadRef}
-        label="Edit comment"
+        label={t("Edit comment")}
         saving={editing.saving}
         onSave={(body) => editing.onSave(comment, body)}
         onCancel={() => editing.onEdit(null)}
@@ -144,7 +145,7 @@ function CommentBody({
           size="icon-xs"
           variant="ghost"
           className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
-          aria-label="Edit comment"
+          aria-label={t("Edit comment")}
           onClick={() => editing.onEdit(comment)}
         >
           <PencilIcon className="size-3" />
@@ -379,8 +380,8 @@ function CommentComposer({
         disabled={submitting !== null || actionPending}
         value={body}
         rows={3}
-        placeholder="Leave a comment"
-        aria-label="Comment on this pull request"
+        placeholder={t("Leave a comment")}
+        aria-label={t("Comment on this pull request")}
         onChange={(event) => setBody(event.target.value)}
       />
       <div className="flex justify-end gap-2">
@@ -598,10 +599,10 @@ export function PullRequestSummaryTab({
     <div className="h-full overflow-y-auto" data-pull-request-summary-scroll>
       <section className="px-4 py-3">
         <div>
-          <MetaRow icon={<UsersIcon className="size-3.5" />} label="Reviewers">
+          <MetaRow icon={<UsersIcon className="size-3.5" />} label={t("Reviewers")}>
             <span className="flex min-w-0 flex-wrap items-center gap-1.5">
               {reviewerEntries.length === 0 ? (
-                <span className="text-muted-foreground">None</span>
+                <span className="text-muted-foreground">{t("None")}</span>
               ) : (
                 <span className="flex items-center -space-x-1">
                   {reviewerEntries.map((entry) => {
@@ -691,10 +692,10 @@ export function PullRequestSummaryTab({
           {/* The row is shown empty only where a label could be put on it from here; on a host
               with none to offer, an empty row is a row about nothing. */}
           {detail.labels.length > 0 || detail.capabilities.labels === true ? (
-            <MetaRow icon={<TagIcon className="size-3.5" />} label="Labels">
+            <MetaRow icon={<TagIcon className="size-3.5" />} label={t("Labels")}>
               <span className="flex min-w-0 flex-wrap items-center gap-1">
                 {detail.labels.length === 0 ? (
-                  <span className="text-muted-foreground">None</span>
+                  <span className="text-muted-foreground">{t("None")}</span>
                 ) : (
                   detail.labels.map((label) => {
                     const dot = pullRequestLabelColor(label.color);
@@ -724,7 +725,7 @@ export function PullRequestSummaryTab({
               </span>
             </MetaRow>
           ) : null}
-          <MetaRow icon={<MessageSquareIcon className="size-3.5" />} label="Comments">
+          <MetaRow icon={<MessageSquareIcon className="size-3.5" />} label={t("Comments")}>
             {activityPending
               ? "Loading conversation…"
               : activityError
@@ -736,7 +737,7 @@ export function PullRequestSummaryTab({
         </div>
       </section>
 
-      <Section title="Description">
+      <Section title={t("Description")}>
         <div className="group">
           {bodyScope === detail.url ? (
             <PullRequestMarkdownEditor
@@ -746,8 +747,8 @@ export function PullRequestSummaryTab({
               cwd={detail.workspaceRoot}
               environmentId={environmentId}
               threadRef={threadRef}
-              label="Pull request description"
-              placeholder="Describe this pull request"
+              label={t("Pull request description")}
+              placeholder={t("Describe this pull request")}
               saving={bodySaving}
               onSave={(body) => void saveBody(body)}
               onCancel={() => setBodyScope(null)}
@@ -766,7 +767,7 @@ export function PullRequestSummaryTab({
                   size="icon-xs"
                   variant="ghost"
                   className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
-                  aria-label="Edit description"
+                  aria-label={t("Edit description")}
                   onClick={() => setBodyScope(detail.url)}
                 >
                   <PencilIcon className="size-3" />
@@ -785,9 +786,9 @@ export function PullRequestSummaryTab({
         </div>
       </Section>
 
-      <Section title="Checks" count={detail.checks.length}>
+      <Section title={t("Checks")} count={detail.checks.length}>
         {detail.checks.length === 0 ? (
-          <p className="text-xs text-muted-foreground">No checks reported.</p>
+          <p className="text-xs text-muted-foreground">{t("No checks reported.")}</p>
         ) : (
           <div className="space-y-0.5">
             {detail.checks.map((check, index) => {
@@ -839,7 +840,7 @@ export function PullRequestSummaryTab({
       </Section>
 
       <Section
-        title="Comments"
+        title={t("Comments")}
         {...(activityPending || activityError ? {} : { count: detail.commentCount })}
         actions={
           !activityPending && !activityError && detail.comments.length > 0 ? (
@@ -873,7 +874,7 @@ export function PullRequestSummaryTab({
               </p>
             ) : null}
             {detail.comments.length === 0 ? (
-              <p className="py-2 text-xs text-muted-foreground">No comments yet.</p>
+              <p className="py-2 text-xs text-muted-foreground">{t("No comments yet.")}</p>
             ) : (
               <div className="space-y-3">
                 {commentOrder === "oldest" ? showOldestCommentsButton : null}

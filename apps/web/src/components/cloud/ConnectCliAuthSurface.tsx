@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { useAuth, useClerk, useUser } from "@clerk/react";
 import { encodeConnectAuthCode, readConnectAuthorizeRequest } from "@t3tools/shared/connectAuth";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -108,7 +109,7 @@ export function ConnectCliAuthorizeSurface() {
             ? "Step 1 of 2 · Browser authorization"
             : "Browser authorization"
         }
-        title="Connecting your terminal"
+        title={t("Connecting your terminal")}
         description={
           isSignedIn
             ? "Redirecting to authorize T3 Connect for your CLI…"
@@ -118,7 +119,7 @@ export function ConnectCliAuthorizeSurface() {
       {isLoaded && !isSignedIn ? (
         <div className="mt-6">
           <Button type="button" onClick={openSignIn}>
-            Sign in
+            {t("Sign in")}
           </Button>
         </div>
       ) : null}
@@ -141,8 +142,10 @@ export function ConnectCliCallbackSurface() {
       <AuthSurfaceShell>
         <ConnectCliAuthMessage
           eyebrow="Step 2 of 2 · Terminal handoff"
-          title="Authorization did not complete"
-          description="No authorization code was returned. Re-run `t3 connect` in your terminal and try again."
+          title={t("Authorization did not complete")}
+          description={t(
+            "No authorization code was returned. Re-run `t3 connect` in your terminal and try again.",
+          )}
         />
       </AuthSurfaceShell>
     );
@@ -157,8 +160,10 @@ export function ConnectCliCallbackSurface() {
       <AuthSurfaceShell>
         <ConnectCliAuthMessage
           eyebrow="Step 2 of 2 · Terminal handoff"
-          title="This code belongs to a different request"
-          description="This authorization response does not match a connect request started in this browser. Re-run `t3 connect` in your terminal and open the freshly printed URL in this browser."
+          title={t("This code belongs to a different request")}
+          description={t(
+            "This authorization response does not match a connect request started in this browser. Re-run `t3 connect` in your terminal and open the freshly printed URL in this browser.",
+          )}
         />
       </AuthSurfaceShell>
     );
@@ -171,7 +176,7 @@ export function ConnectCliCallbackSurface() {
     <AuthSurfaceShell>
       <ConnectCliAuthMessage
         eyebrow="Step 2 of 2 · Terminal handoff"
-        title="Almost connected"
+        title={t("Almost connected")}
         description={
           accountLabel
             ? `Enter this code in your waiting terminal to connect it as ${accountLabel}.`
@@ -182,7 +187,7 @@ export function ConnectCliCallbackSurface() {
       <div className="mt-6 overflow-hidden rounded-xl border border-border/80 bg-background/65">
         <div className="flex items-center justify-between border-b border-border/70 px-4 py-2.5">
           <span className="text-[10px] font-semibold tracking-[0.16em] text-muted-foreground uppercase">
-            One-time authorization code
+            {t("One-time authorization code")}
           </span>
           <span className="font-mono text-[10px] text-muted-foreground">expires shortly</span>
         </div>

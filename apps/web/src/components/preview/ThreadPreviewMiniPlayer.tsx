@@ -1,4 +1,5 @@
-"use client";
+import { t } from "~/i18n/t";
+("use client");
 
 import { FILL_PREVIEW_VIEWPORT, type ScopedThreadRef } from "@t3tools/contracts";
 import { PanelRightIcon, PictureInPicture2, XIcon } from "lucide-react";
@@ -190,7 +191,7 @@ export function ThreadPreviewMiniPlayer({ threadRef, tabId, bottomInset }: Props
     <div ref={containerRef} className="pointer-events-none absolute inset-0">
       {frame ? (
         <section
-          aria-label="Floating browser preview"
+          aria-label={t("Floating browser preview")}
           data-preview-mini-player={tabId}
           className="pointer-events-none absolute select-none"
           style={{ left: frame.x, top: frame.y, width: frame.width, height: frame.height }}
@@ -213,7 +214,7 @@ export function ThreadPreviewMiniPlayer({ threadRef, tabId, bottomInset }: Props
                     <Button
                       variant="ghost"
                       size="icon-xs"
-                      aria-label="Open preview in right panel"
+                      aria-label={t("Open preview in right panel")}
                       onPointerDown={(event) => event.stopPropagation()}
                       onClick={openInPanel}
                     />
@@ -221,7 +222,7 @@ export function ThreadPreviewMiniPlayer({ threadRef, tabId, bottomInset }: Props
                 >
                   <PanelRightIcon />
                 </TooltipTrigger>
-                <TooltipPopup side="top">Open in right panel</TooltipPopup>
+                <TooltipPopup side="top">{t("Open in right panel")}</TooltipPopup>
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger
@@ -254,7 +255,7 @@ export function ThreadPreviewMiniPlayer({ threadRef, tabId, bottomInset }: Props
                     <Button
                       variant="ghost"
                       size="icon-xs"
-                      aria-label="Close floating preview"
+                      aria-label={t("Close floating preview")}
                       onPointerDown={(event) => event.stopPropagation()}
                       onClick={close}
                     />
@@ -262,7 +263,7 @@ export function ThreadPreviewMiniPlayer({ threadRef, tabId, bottomInset }: Props
                 >
                   <XIcon />
                 </TooltipTrigger>
-                <TooltipPopup side="top">Close floating preview</TooltipPopup>
+                <TooltipPopup side="top">{t("Close floating preview")}</TooltipPopup>
               </Tooltip>
             </div>
           </div>

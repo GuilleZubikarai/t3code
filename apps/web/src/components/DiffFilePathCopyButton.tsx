@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { useRef } from "react";
 import { useCopyToClipboard } from "../hooks/useCopyToClipboard";
@@ -26,7 +27,7 @@ export function DiffFilePathCopyButton({ filePath }: { filePath: string }) {
             size="icon-micro"
             variant="ghost"
             className="text-muted-foreground [:hover,[data-pressed]]:bg-transparent"
-            aria-label="Copy file path"
+            aria-label={t("Copy file path")}
             onClick={() => copyToClipboard(filePath, undefined)}
           />
         }

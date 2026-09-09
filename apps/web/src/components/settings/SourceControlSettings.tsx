@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { RefreshIcon } from "~/components/ui/refresh-icon";
 import { ChevronDownIcon, GitPullRequestIcon } from "lucide-react";
 import * as Duration from "effect/Duration";
@@ -220,7 +221,7 @@ function itemSummary({
     if (auth.status === "authenticated") {
       return (
         <>
-          <span>Authenticated</span>
+          <span>{t("Authenticated")}</span>
           {authAccount ? (
             <>
               <span aria-hidden>as</span>
@@ -252,7 +253,7 @@ function itemSummary({
     );
   }
 
-  return <span>Available</span>;
+  return <span>{t("Available")}</span>;
 }
 
 function DiscoveryItemRow({
@@ -297,7 +298,7 @@ function DiscoveryItemRow({
               {version ? <code className="text-xs text-muted-foreground">{version}</code> : null}
               {isVcsNotReady(item) ? (
                 <Badge variant="warning" size="sm">
-                  Coming Soon
+                  {t("Coming Soon")}
                 </Badge>
               ) : null}
               {authStatus?.badge ? (
@@ -391,7 +392,9 @@ function GitFetchIntervalSettings() {
             </span>
           </div>
           <p className="max-w-2xl text-xs leading-relaxed text-muted-foreground">
-            Refresh remote branches in the background. Set to 0 to avoid automatic Git prompts.
+            {t(
+              "Refresh remote branches in the background. Set to 0 to avoid automatic Git prompts.",
+            )}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
@@ -410,9 +413,9 @@ function GitFetchIntervalSettings() {
             }
           >
             <NumberFieldGroup>
-              <NumberFieldDecrement aria-label="Decrease fetch interval" />
-              <NumberFieldInput aria-label="Automatic Git fetch interval in seconds" />
-              <NumberFieldIncrement aria-label="Increase fetch interval" />
+              <NumberFieldDecrement aria-label={t("Decrease fetch interval")} />
+              <NumberFieldInput aria-label={t("Automatic Git fetch interval in seconds")} />
+              <NumberFieldIncrement aria-label={t("Increase fetch interval")} />
             </NumberFieldGroup>
           </NumberField>
           <span className="text-xs text-muted-foreground">seconds</span>
@@ -471,7 +474,7 @@ function EmptySourceControlDiscovery({
   const hasError = error !== null;
 
   return (
-    <SettingsSection id={searchableSetting("source-control").id} title="Server environment">
+    <SettingsSection id={searchableSetting("source-control").id} title={t("Server environment")}>
       <Empty className="min-h-88">
         <EmptyMedia variant="icon">
           <GitPullRequestIcon />
@@ -489,7 +492,7 @@ function EmptySourceControlDiscovery({
         <EmptyContent>
           <Button size="sm" variant="outline" onClick={onScan} disabled={isPending}>
             <RefreshIcon className="size-3.5" refreshing={isPending} />
-            Scan
+            {t("Scan")}
           </Button>
         </EmptyContent>
       </Empty>
@@ -531,13 +534,13 @@ export function SourceControlSettingsPanel() {
             variant="ghost-muted"
             onClick={handleScan}
             disabled={discovery.isPending}
-            aria-label="Rescan server environment"
+            aria-label={t("Rescan server environment")}
           >
             <RefreshIcon refreshing={discovery.isPending} />
           </Button>
         }
       />
-      <TooltipPopup side="top">Rescan Git and hosting integrations</TooltipPopup>
+      <TooltipPopup side="top">{t("Rescan Git and hosting integrations")}</TooltipPopup>
     </Tooltip>
   );
 
@@ -546,15 +549,15 @@ export function SourceControlSettingsPanel() {
       <SharedSettingsMismatchAlert />
       {isInitialScanPending ? (
         <>
-          <SourceControlSectionSkeleton title="Version Control" headerAction={scanButton} />
-          <SourceControlSectionSkeleton title="Source Control Providers" />
+          <SourceControlSectionSkeleton title={t("Version Control")} headerAction={scanButton} />
+          <SourceControlSectionSkeleton title={t("Source Control Providers")} />
         </>
       ) : hasDiscoveryItems ? (
         <>
           {hasVersionControlSystems ? (
             <SettingsSection
               id={searchableSetting("source-control").id}
-              title="Version Control"
+              title={t("Version Control")}
               headerAction={scanButton}
             >
               {result.versionControlSystems.map((item) => (
@@ -570,7 +573,7 @@ export function SourceControlSettingsPanel() {
           {result.sourceControlProviders.length > 0 ? (
             <SettingsSection
               id={hasVersionControlSystems ? undefined : searchableSetting("source-control").id}
-              title="Source Control Providers"
+              title={t("Source Control Providers")}
               headerAction={hasVersionControlSystems ? null : scanButton}
             >
               {result.sourceControlProviders.map((item) => (

@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   DEFAULT_CLIENT_SETTINGS,
   DEFAULT_SERVER_SETTINGS,
@@ -162,34 +163,34 @@ export function ProjectDefaultsSettings({
     <SettingsPageContainer>
       <SettingsSection
         id={searchableSetting("project-defaults").id}
-        title="Project defaults"
+        title={t("Project defaults")}
         hideTitle
       >
         <SettingsRow
-          title="Name"
+          title={t("Name")}
           aria-disabled
-          description="Select a project to change its name."
+          description={t("Select a project to change its name.")}
           control={
             <Input
               size="sm"
               className="w-full sm:w-64"
-              aria-label="Project name"
-              placeholder="Select a project"
+              aria-label={t("Project name")}
+              placeholder={t("Select a project")}
               disabled
             />
           }
         />
         <SettingsRow
-          title="Project icon"
+          title={t("Project icon")}
           aria-disabled
-          description="Select a project to change its icon."
+          description={t("Select a project to change its icon.")}
           control={
             <div className="flex items-center gap-2">
               <Button size="sm" variant="outline" disabled>
-                Choose icon
+                {t("Choose icon")}
               </Button>
               <Button size="sm" variant="outline" disabled>
-                Choose file
+                {t("Choose file")}
               </Button>
             </div>
           }
@@ -202,8 +203,8 @@ export function ProjectDefaultsSettings({
           </p>
         ) : null}
         <SettingsRow
-          title="Model"
-          description="Default model for new threads. Projects can override it."
+          title={t("Model")}
+          description={t("Default model for new threads. Projects can override it.")}
           status={
             targets.length === 0
               ? undefined
@@ -268,14 +269,14 @@ export function ProjectDefaultsSettings({
                 ) : null}
               </fieldset>
             ) : (
-              <span className="text-sm text-muted-foreground">No providers available</span>
+              <span className="text-sm text-muted-foreground">{t("No providers available")}</span>
             )
           }
         />
         <SettingsRow
           id={searchableSetting("new-threads").id}
-          title="Workspace"
-          description="Where new threads start, unless overridden by the project or t3.json."
+          title={t("Workspace")}
+          description={t("Where new threads start, unless overridden by the project or t3.json.")}
           resetAction={
             mixedWorkspace ||
             serverSettings.defaultThreadEnvMode !== DEFAULT_SERVER_SETTINGS.defaultThreadEnvMode ? (
@@ -297,7 +298,7 @@ export function ProjectDefaultsSettings({
                   void save({ defaultThreadEnvMode: value });
               }}
             >
-              <SelectTrigger size="sm" aria-label="Default workspace">
+              <SelectTrigger size="sm" aria-label={t("Default workspace")}>
                 <SelectValue>
                   {targets.length === 0
                     ? "Unavailable"
@@ -314,14 +315,16 @@ export function ProjectDefaultsSettings({
           }
         />
         <SettingsRow
-          title="Automatically pull"
-          description="Keeps the default branch current when the checkout has no local changes or commits. Projects can override it."
+          title={t("Automatically pull")}
+          description={t(
+            "Keeps the default branch current when the checkout has no local changes or commits. Projects can override it.",
+          )}
           status={mixedAutoPull ? "Differs by machine" : undefined}
           resetAction={
             serverSettings.defaultAutoPull || mixedAutoPull ? (
               <SettingResetButton
                 label="default automatic pull"
-                tooltip="Reset automatic pull to off"
+                tooltip={t("Reset automatic pull to off")}
                 disabled={disabled("defaultAutoPull")}
                 onClick={() => void save({ defaultAutoPull: false })}
               />
@@ -329,7 +332,7 @@ export function ProjectDefaultsSettings({
           }
           control={
             <Switch
-              aria-label="Default automatic pull"
+              aria-label={t("Default automatic pull")}
               checked={serverSettings.defaultAutoPull}
               disabled={disabled("defaultAutoPull")}
               onCheckedChange={(enabled) => void save({ defaultAutoPull: enabled })}
@@ -338,8 +341,8 @@ export function ProjectDefaultsSettings({
         />
         <SettingsRow
           id={searchableSetting("agent-browser-access").id}
-          title="Agent browser access"
-          description="Allow agents to use the shared browser. Projects can override it."
+          title={t("Agent browser access")}
+          description={t("Allow agents to use the shared browser. Projects can override it.")}
           resetAction={
             mixedBrowser ||
             serverSettings.enableAgentBrowserAccess !==
@@ -370,7 +373,7 @@ export function ProjectDefaultsSettings({
                   void save({ enableAgentBrowserAccess: value === "enabled" });
               }}
             >
-              <SelectTrigger size="sm" aria-label="Default agent browser access">
+              <SelectTrigger size="sm" aria-label={t("Default agent browser access")}>
                 <SelectValue>
                   {targets.length === 0
                     ? "Unavailable"
@@ -382,29 +385,31 @@ export function ProjectDefaultsSettings({
                 </SelectValue>
               </SelectTrigger>
               <SelectPopup align="end" alignItemWithTrigger={false}>
-                <SelectItem value="enabled">Enabled</SelectItem>
-                <SelectItem value="disabled">Disabled</SelectItem>
+                <SelectItem value="enabled">{t("Enabled")}</SelectItem>
+                <SelectItem value="disabled">{t("Disabled")}</SelectItem>
               </SelectPopup>
             </Select>
           }
         />
       </SettingsSection>
-      <SettingsSection title="Checkout">
+      <SettingsSection title={t("Checkout")}>
         <SettingsRow
-          title="Checkout"
+          title={t("Checkout")}
           aria-disabled
-          description="Select a project to choose one of its checkouts."
+          description={t("Select a project to choose one of its checkouts.")}
           control={
             <Select disabled>
-              <SelectTrigger size="sm" aria-label="Checkout">
-                <SelectValue placeholder="Select a project" />
+              <SelectTrigger size="sm" aria-label={t("Checkout")}>
+                <SelectValue placeholder={t("Select a project")} />
               </SelectTrigger>
             </Select>
           }
         />
         <SettingsRow
-          title="Project grouping"
-          description="Default grouping across all machines in this client. Individual checkout overrides are preserved."
+          title={t("Project grouping")}
+          description={t(
+            "Default grouping across all machines in this client. Individual checkout overrides are preserved.",
+          )}
           resetAction={
             clientSettings.sidebarProjectGroupingMode !==
             DEFAULT_CLIENT_SETTINGS.sidebarProjectGroupingMode ? (
@@ -426,7 +431,7 @@ export function ProjectDefaultsSettings({
                   void updateClientSettings({ sidebarProjectGroupingMode: value });
               }}
             >
-              <SelectTrigger size="sm" aria-label="Default project grouping">
+              <SelectTrigger size="sm" aria-label={t("Default project grouping")}>
                 <SelectValue>
                   {PROJECT_GROUPING_MODE_LABELS[clientSettings.sidebarProjectGroupingMode]}
                 </SelectValue>
@@ -444,27 +449,29 @@ export function ProjectDefaultsSettings({
           }
         />
         <SettingsRow
-          title="Remove checkout"
+          title={t("Remove checkout")}
           aria-disabled
-          description="Select a project to remove one of its checkouts."
+          description={t("Select a project to remove one of its checkouts.")}
           control={
             <Button size="sm" variant="destructive-outline" disabled>
               <Trash2Icon className="size-3.5" />
-              Remove checkout
+              {t("Remove checkout")}
             </Button>
           }
         />
       </SettingsSection>
       <ProjectDefaultActionsSettings environmentId={environmentId} />
-      <SettingsSection title="Danger">
+      <SettingsSection title={t("Danger")}>
         <SettingsRow
-          title="Remove project"
+          title={t("Remove project")}
           aria-disabled
-          description="Select a project to remove its entries and threads. Files on disk are not touched."
+          description={t(
+            "Select a project to remove its entries and threads. Files on disk are not touched.",
+          )}
           control={
             <Button size="sm" variant="destructive-outline" disabled>
               <Trash2Icon />
-              Remove project
+              {t("Remove project")}
             </Button>
           }
         />

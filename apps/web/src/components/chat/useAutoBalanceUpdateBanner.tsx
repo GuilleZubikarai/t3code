@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { useAtomValue } from "@effect/atom-react";
 import type { ServerUpdateState } from "@t3tools/client-runtime/state/server";
 import { Atom } from "effect/unstable/reactivity";
@@ -109,7 +110,7 @@ export function useAutoBalanceUpdateBanner(
                   <ServerUpdateProgress state={machine.state} />
                 ) : !machine.remoteUpdate ? (
                   <>
-                    <div className="text-muted-foreground">Manual update required</div>
+                    <div className="text-muted-foreground">{t("Manual update required")}</div>
                     <ServerUpdateAction {...machine} />
                   </>
                 ) : (

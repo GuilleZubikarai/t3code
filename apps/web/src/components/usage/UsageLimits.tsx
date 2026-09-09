@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   type EnvironmentId,
   type ProviderConsumeResetCreditOutcome,
@@ -133,7 +134,9 @@ function WindowBar({
             {remaining}% left{timeLeft !== null ? ` · ${timeLeft}% of the window left` : ""}
           </span>
           {timeLeft !== null ? (
-            <span className="text-muted-foreground">The line is where even spending would be.</span>
+            <span className="text-muted-foreground">
+              {t("The line is where even spending would be.")}
+            </span>
           ) : null}
           {resetsAt ? (
             <span className="text-muted-foreground">
@@ -250,15 +253,15 @@ export function ResetCreditDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogPopup>
         <AlertDialogHeader>
-          <AlertDialogTitle>Use a reset credit?</AlertDialogTitle>
+          <AlertDialogTitle>{t("Use a reset credit?")}</AlertDialogTitle>
           <AlertDialogDescription>
             This redeems one credit on your account and clears the current rate-limit windows. It
             cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
-          <Button onClick={onConfirm}>Use credit</Button>
+          <AlertDialogClose render={<Button variant="outline" />}>{t("Cancel")}</AlertDialogClose>
+          <Button onClick={onConfirm}>{t("Use credit")}</Button>
         </AlertDialogFooter>
       </AlertDialogPopup>
     </AlertDialog>

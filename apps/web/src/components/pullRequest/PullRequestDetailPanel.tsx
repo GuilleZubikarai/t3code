@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { RefreshIcon } from "~/components/ui/refresh-icon";
 import { scopedThreadKey, scopeProjectRef } from "@t3tools/client-runtime/environment";
 import { squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
@@ -359,7 +360,7 @@ function PullRequestCopyableCode({
             isCopied ? "opacity-100" : "opacity-0",
           )}
         >
-          Copied
+          {t("Copied")}
         </span>
       </TooltipTrigger>
       <TooltipPopup className="max-w-96 wrap-anywhere font-mono" side={tooltipSide}>
@@ -425,7 +426,9 @@ function PullRequestBaseFreshnessWarning({
         viewportClassName="py-2.5 [--viewport-inline-padding:--spacing(3)]"
       >
         <p className="text-xs text-foreground">{summary}</p>
-        <p className="mt-0.5 text-xs text-muted-foreground">Changes can be cleanly merged.</p>
+        <p className="mt-0.5 text-xs text-muted-foreground">
+          {t("Changes can be cleanly merged.")}
+        </p>
         {/* Each way the host offers and this reader may take, as its own button: a split button
             would need a menu inside a popover, and two buttons say the same thing in one layer. */}
         {freshness.methods.length > 0 ? (
@@ -1517,16 +1520,16 @@ export function PullRequestDetailPanel({
                     <MenuItem onClick={() => startCheckout("worktree")}>
                       <GitBranchIcon className="mt-0.5 size-3.5 shrink-0 self-start" />
                       <span className="flex min-w-0 flex-col">
-                        <span>In a separate worktree</span>
+                        <span>{t("In a separate worktree")}</span>
                         <span className="text-xs text-muted-foreground">
-                          Its own folder and thread. Nothing you have open moves.
+                          {t("Its own folder and thread. Nothing you have open moves.")}
                         </span>
                       </span>
                     </MenuItem>
                     <MenuItem onClick={() => startCheckout("local")}>
                       <FolderGit2Icon className="mt-0.5 size-3.5 shrink-0 self-start" />
                       <span className="flex min-w-0 flex-col">
-                        <span>In this repository</span>
+                        <span>{t("In this repository")}</span>
                         <span className="text-xs text-muted-foreground">
                           Switches the branch you are working in, like `gh pr checkout`.
                         </span>
@@ -1601,18 +1604,20 @@ export function PullRequestDetailPanel({
                           size="xs"
                           disabled={actionPending}
                           onClick={() => void perform("ready")}
-                          aria-label="Ready for review"
+                          aria-label={t("Ready for review")}
                         >
                           <GitPullRequestIcon
                             aria-hidden
                             className="hidden size-3.5 @max-[30rem]/pr-header:inline"
                           />
-                          <span className="@max-[30rem]/pr-header:hidden">Ready for review</span>
+                          <span className="@max-[30rem]/pr-header:hidden">
+                            {t("Ready for review")}
+                          </span>
                         </Button>
                       </span>
                     }
                   />
-                  <TooltipPopup side="top">Ready for review</TooltipPopup>
+                  <TooltipPopup side="top">{t("Ready for review")}</TooltipPopup>
                 </Tooltip>
               ) : primaryAction === "enable-auto-merge" ? (
                 <Tooltip>
@@ -1704,7 +1709,7 @@ export function PullRequestDetailPanel({
                 <MenuTrigger
                   render={
                     <Button
-                      aria-label="More pull request actions"
+                      aria-label={t("More pull request actions")}
                       className="size-6"
                       size="icon-xs"
                       variant="ghost-muted"
@@ -1722,7 +1727,7 @@ export function PullRequestDetailPanel({
                       className="size-3.5"
                       refreshing={isInvalidating || detailQuery.isPending}
                     />
-                    Refresh
+                    {t("Refresh")}
                   </MenuItem>
                   <MenuItem disabled={handoff !== null} onClick={askAboutPullRequest}>
                     <MessageCircleQuestionIcon className="mt-0.5 size-3.5 shrink-0 self-start" />
@@ -1781,7 +1786,7 @@ export function PullRequestDetailPanel({
                           onClick={() => setConfirmation({ open: true, action: "merge" })}
                         >
                           <GitMergeIcon className="size-3.5" />
-                          Merge now
+                          {t("Merge now")}
                         </MenuItem>
                       ) : null}
                       {/* The same merge, left with the host to carry out once its requirements
@@ -1793,7 +1798,7 @@ export function PullRequestDetailPanel({
                           onClick={() => void perform("disable-auto-merge")}
                         >
                           <GitMergeIcon className="size-3.5" />
-                          Disable auto-merge
+                          {t("Disable auto-merge")}
                         </MenuItem>
                       ) : showsAutoMerge ? (
                         <MenuItem
@@ -1803,7 +1808,7 @@ export function PullRequestDetailPanel({
                           }
                         >
                           <GitMergeIcon className="size-3.5" />
-                          Enable auto-merge
+                          {t("Enable auto-merge")}
                         </MenuItem>
                       ) : null}
                       {/* A preference for the merge action rather than a second action, so it
@@ -1860,7 +1865,7 @@ export function PullRequestDetailPanel({
                   </MenuItem>
                   <MenuItem onClick={() => void writeTextToClipboard(detail.url)}>
                     <LinkIcon className="size-3.5" />
-                    Copy link
+                    {t("Copy link")}
                   </MenuItem>
                   {detail.state === "open" && can("close") ? (
                     <>
@@ -1871,7 +1876,7 @@ export function PullRequestDetailPanel({
                         onClick={() => setConfirmation({ open: true, action: "close" })}
                       >
                         <GitPullRequestClosedIcon className="size-3.5" />
-                        Close pull request
+                        {t("Close pull request")}
                       </MenuItem>
                     </>
                   ) : detail.state === "closed" && can("reopen") ? (
@@ -1879,7 +1884,7 @@ export function PullRequestDetailPanel({
                       <MenuSeparator />
                       <MenuItem disabled={actionPending} onClick={() => void perform("reopen")}>
                         <GitPullRequestIcon className="size-3.5" />
-                        Reopen pull request
+                        {t("Reopen pull request")}
                       </MenuItem>
                     </>
                   ) : detail.state === "merged" && can("revert") ? (
@@ -1890,7 +1895,7 @@ export function PullRequestDetailPanel({
                         onClick={() => setConfirmation({ open: true, action: "revert" })}
                       >
                         <RotateCcwIcon className="size-3.5" />
-                        Revert changes
+                        {t("Revert changes")}
                       </MenuItem>
                     </>
                   ) : null}
@@ -1902,7 +1907,7 @@ export function PullRequestDetailPanel({
             <Button
               size="icon-xs"
               variant="ghost"
-              aria-label="Collapse pull request panel"
+              aria-label={t("Collapse pull request panel")}
               onClick={onClose}
             >
               <PanelRightIcon className="size-3.5" />
@@ -1948,7 +1953,7 @@ export function PullRequestDetailPanel({
                           <span className="inline-flex min-w-0 max-w-[40%] shrink-0 items-center gap-1">
                             {isStackedPullRequest ? (
                               <LayersIcon
-                                aria-label="Stacked pull request"
+                                aria-label={t("Stacked pull request")}
                                 className="size-3 shrink-0"
                               />
                             ) : null}
@@ -2045,7 +2050,7 @@ export function PullRequestDetailPanel({
                         size="icon-xs"
                         variant="ghost"
                         className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
-                        aria-label="Edit title"
+                        aria-label={t("Edit title")}
                         onClick={() => setTitleScope({ pullRequestKey, text: detail.title })}
                       >
                         <PencilIcon className="size-3" />
@@ -2061,7 +2066,7 @@ export function PullRequestDetailPanel({
                       size="sm"
                       disabled={titleSaving}
                       value={titleDraft}
-                      aria-label="Pull request title"
+                      aria-label={t("Pull request title")}
                       onChange={(event) =>
                         setTitleScope({ pullRequestKey, text: event.target.value })
                       }
@@ -2082,7 +2087,7 @@ export function PullRequestDetailPanel({
                         disabled={titleSaving}
                         onClick={() => setTitleScope(null)}
                       >
-                        Cancel
+                        {t("Cancel")}
                       </Button>
                       <Button
                         size="xs"
@@ -2132,7 +2137,7 @@ export function PullRequestDetailPanel({
                           <span className="inline-flex min-w-0 max-w-[40%] shrink-0 items-center gap-1">
                             {isStackedPullRequest ? (
                               <LayersIcon
-                                aria-label="Stacked pull request"
+                                aria-label={t("Stacked pull request")}
                                 className="size-3 shrink-0"
                               />
                             ) : null}
@@ -2187,7 +2192,7 @@ export function PullRequestDetailPanel({
         {detail ? (
           <nav
             className="col-span-2 flex min-w-0 items-center gap-1 overflow-x-auto border-t border-border/60 px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            aria-label="Pull request tabs"
+            aria-label={t("Pull request tabs")}
           >
             <ToggleGroup
               size="segmented"
@@ -2421,7 +2426,9 @@ export function PullRequestDetailPanel({
             ) : null}
             {mountedTabs.has("code") ? (
               <div className={cn("absolute inset-0", tab !== "code" && "invisible")}>
-                <Suspense fallback={<DiffPanelLoadingState label="Loading pull request diff..." />}>
+                <Suspense
+                  fallback={<DiffPanelLoadingState label={t("Loading pull request diff...")} />}
+                >
                   <PullRequestCodeTab
                     {...(attachTarget ? { onAddToAgentSelection: addSelectionToAgent } : {})}
                     environmentId={environmentId}
@@ -2479,7 +2486,7 @@ export function PullRequestDetailPanel({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogClose render={<Button variant="outline" size="sm" />}>
-              Cancel
+              {t("Cancel")}
             </AlertDialogClose>
             <Button
               size="sm"

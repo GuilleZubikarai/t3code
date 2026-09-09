@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 /**
  * Asking someone to review, from the row that says who is already reviewing.
  *
@@ -103,7 +104,7 @@ export function PullRequestReviewerPicker({
   return (
     <PullRequestCandidatePicker
       icon={<UserPlusIcon className="size-3.5" />}
-      label="Request a review"
+      label={t("Request a review")}
       allowed={allowed}
       disabledReason="Asking someone to review needs write access on this repository"
       open={open}
@@ -130,7 +131,7 @@ export function PullRequestReviewerPicker({
             <span className="shrink-0 text-muted-foreground">team</span>
           ) : null}
           {candidate.isRequested ? (
-            <CheckIcon aria-label="Already asked" className="size-3.5 shrink-0" />
+            <CheckIcon aria-label={t("Already asked")} className="size-3.5 shrink-0" />
           ) : null}
         </>
       )}

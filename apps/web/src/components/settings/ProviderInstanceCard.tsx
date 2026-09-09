@@ -1,4 +1,5 @@
-"use client";
+import { t } from "~/i18n/t";
+("use client");
 
 import { Spinner } from "~/components/ui/spinner";
 
@@ -260,7 +261,7 @@ function ProviderEnvironmentSection(props: {
             className="w-44 shrink-0 font-mono"
             value={variable.name}
             onCommit={(name) => updateVariable(variable.id, { name: name.trim() })}
-            placeholder="VARIABLE_NAME"
+            placeholder={t("VARIABLE_NAME")}
             spellCheck={false}
             aria-label={`Environment variable name ${index + 1}`}
           />
@@ -330,12 +331,12 @@ function ProviderEnvironmentSection(props: {
       <div className="flex min-h-[1.875rem] flex-wrap items-center justify-end gap-x-3 gap-y-1">
         {rows.length > 0 ? (
           <span className="mr-auto text-xs text-muted-foreground">
-            Sensitive values are stored separately and never returned to the app.
+            {t("Sensitive values are stored separately and never returned to the app.")}
           </span>
         ) : null}
         <Button type="button" size="xs" variant="ghost-muted" onClick={addVariable}>
           <PlusIcon className="size-3" />
-          Add variable
+          {t("Add variable")}
         </Button>
       </div>
     </div>
@@ -574,7 +575,7 @@ export function ProviderInstanceCard({
     isAuthenticated && authEmail ? (
       <>
         {needsAttention ? statusDotNode : null}
-        <span>Authenticated as</span>
+        <span>{t("Authenticated as")}</span>
         <ProviderAuthEmail email={authEmail} />
         {authLabel ? <span>· {authLabel}</span> : null}
         {summary.detail ? (
@@ -645,10 +646,14 @@ export function ProviderInstanceCard({
                         </Button>
                       }
                     />
-                    <TooltipPopup side="top">Copy update command</TooltipPopup>
+                    <TooltipPopup side="top">{t("Copy update command")}</TooltipPopup>
                   </Tooltip>
                 ) : (
-                  <span role="img" aria-label="Update available" className="inline-flex shrink-0">
+                  <span
+                    role="img"
+                    aria-label={t("Update available")}
+                    className="inline-flex shrink-0"
+                  >
                     <ArrowUpCircleIcon className="size-3.5 text-muted-foreground" />
                   </span>
                 )
@@ -704,7 +709,7 @@ export function ProviderInstanceCard({
                       ? "text-warning hover:text-warning"
                       : "text-muted-foreground hover:text-foreground",
                   )}
-                  aria-label="Update available — view details"
+                  aria-label={t("Update available — view details")}
                 >
                   <ArrowUpCircleIcon />
                 </Button>
@@ -718,7 +723,7 @@ export function ProviderInstanceCard({
               <div className="grid min-w-0 gap-3">
                 <div className="grid gap-0.5">
                   <p className="text-[13px] font-semibold leading-tight text-foreground">
-                    Update available
+                    {t("Update available")}
                   </p>
                   <p
                     className={cn(
@@ -767,13 +772,13 @@ export function ProviderInstanceCard({
                             onClick={() =>
                               copyToClipboard(updateCommand, { providerName: displayName })
                             }
-                            aria-label="Copy update command"
+                            aria-label={t("Copy update command")}
                           >
                             <CopyIcon className="size-3" />
                           </Button>
                         }
                       />
-                      <TooltipPopup side="top">Copy command</TooltipPopup>
+                      <TooltipPopup side="top">{t("Copy command")}</TooltipPopup>
                     </Tooltip>
                   </div>
                 ) : null}
@@ -803,7 +808,7 @@ export function ProviderInstanceCard({
     <>
       <SettingsSection title={displayName} icon={titleIconNode} headerAction={editorHeaderAction}>
         <SettingsRow
-          title="Display name"
+          title={t("Display name")}
           status={
             <div className="flex min-w-0 flex-wrap items-center gap-x-1.5">{editorStatusNode}</div>
           }
@@ -838,13 +843,13 @@ export function ProviderInstanceCard({
       </SettingsSection>
 
       {setup ? (
-        <SettingsSection title="Setup">
+        <SettingsSection title={t("Setup")}>
           <div className="px-3 py-3 sm:px-4">{setup}</div>
         </SettingsSection>
       ) : null}
 
       <SettingsSection
-        title="Runtime"
+        title={t("Runtime")}
         inert={readOnly}
         aria-disabled={readOnly || undefined}
         className={readOnly ? "opacity-50 select-none" : undefined}
@@ -859,7 +864,7 @@ export function ProviderInstanceCard({
           />
         ) : (
           <SettingsRow
-            title="Driver"
+            title={t("Driver")}
             description={
               <span>
                 This instance uses{" "}
@@ -872,14 +877,14 @@ export function ProviderInstanceCard({
       </SettingsSection>
 
       <SettingsSection
-        title="Environment"
+        title={t("Environment")}
         inert={readOnly}
         aria-disabled={readOnly || undefined}
         className={readOnly ? "opacity-50 select-none" : undefined}
       >
         <SettingsRow
-          title="Variables"
-          description="API keys, base URLs, and other per-instance CLI settings."
+          title={t("Variables")}
+          description={t("API keys, base URLs, and other per-instance CLI settings.")}
         >
           <ProviderEnvironmentSection
             environment={instance.environment ?? []}
@@ -890,7 +895,7 @@ export function ProviderInstanceCard({
 
       {driverOption !== undefined ? (
         <SettingsSection
-          title="Models"
+          title={t("Models")}
           inert={readOnly}
           aria-disabled={readOnly || undefined}
           className={readOnly ? "opacity-50 select-none" : undefined}

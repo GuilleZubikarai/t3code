@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { Spinner } from "~/components/ui/spinner";
 import type {
   ChatFileAttachment,
@@ -180,7 +181,7 @@ function WorkspaceImagePreview(props: {
     return (
       <MediaActions source={actionsSource}>
         <div className="flex min-h-0 flex-1 items-center justify-center px-6 text-center text-xs leading-relaxed text-destructive">
-          Unable to load workspace image.
+          {t("Unable to load workspace image.")}
         </div>
       </MediaActions>
     );
@@ -246,7 +247,7 @@ function AttachmentBrowserPreview(props: {
   if (assetUrl._tag === "Failure") {
     return (
       <div className="flex min-h-0 flex-1 items-center justify-center px-6 text-center text-xs leading-relaxed text-destructive">
-        Unable to load attachment preview.
+        {t("Unable to load attachment preview.")}
       </div>
     );
   }
@@ -302,7 +303,7 @@ function WorkspaceBrowserPreview(props: {
   if (assetUrl._tag === "Failure") {
     return (
       <div className="flex min-h-0 flex-1 items-center justify-center px-6 text-center text-xs leading-relaxed text-destructive">
-        Unable to load file preview.
+        {t("Unable to load file preview.")}
       </div>
     );
   }
@@ -1179,7 +1180,7 @@ export default function FilePreviewPanel({
                     className="shrink-0"
                     pressed={false}
                     onPressedChange={handleOpenInBrowser}
-                    aria-label="Open file in preview browser"
+                    aria-label={t("Open file in preview browser")}
                     variant="ghost"
                     size="sm"
                   >
@@ -1187,7 +1188,7 @@ export default function FilePreviewPanel({
                   </Toggle>
                 }
               />
-              <TooltipPopup>Open file in preview browser</TooltipPopup>
+              <TooltipPopup>{t("Open file in preview browser")}</TooltipPopup>
             </Tooltip>
           ) : null}
           {!isHostFile ? (

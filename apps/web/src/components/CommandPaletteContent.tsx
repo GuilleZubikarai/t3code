@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { ArrowDownIcon, ArrowUpIcon } from "lucide-react";
 import { type ComponentProps, type ReactNode, useLayoutEffect, useRef } from "react";
 
@@ -59,22 +60,22 @@ export function CommandPaletteContent({
               <Kbd>
                 <ArrowDownIcon />
               </Kbd>
-              <span>Navigate</span>
+              <span>{t("Navigate")}</span>
             </KbdGroup>
             {footerActionLabel !== undefined ? (
               <KbdGroup className="items-center gap-1.5">
-                <Kbd>Enter</Kbd>
+                <Kbd>{t("Enter")}</Kbd>
                 <span>{footerActionLabel}</span>
               </KbdGroup>
             ) : null}
             {showBackHint ? (
               <KbdGroup className="items-center gap-1.5">
-                <Kbd>Backspace</Kbd>
-                <span>Back</span>
+                <Kbd>{t("Backspace")}</Kbd>
+                <span>{t("Back")}</span>
               </KbdGroup>
             ) : null}
             <KbdGroup className="items-center gap-1.5">
-              <Kbd>Esc</Kbd>
+              <Kbd>{t("Esc")}</Kbd>
               <span>{escapeLabel}</span>
             </KbdGroup>
           </div>

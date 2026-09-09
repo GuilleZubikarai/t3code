@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { useAtomValue } from "@effect/atom-react";
 import { useNavigate } from "@tanstack/react-router";
 import { useRef } from "react";
@@ -89,7 +90,7 @@ export function SourceControlWritingSettingsSection() {
   );
 
   return (
-    <SettingsSection id="source-control-text-generation" title="Text generation">
+    <SettingsSection id="source-control-text-generation" title={t("Text generation")}>
       <SettingsRow
         serverScoped
         {...searchableSetting("source-control-writing-style")}
@@ -125,7 +126,7 @@ export function SourceControlWritingSettingsSection() {
             <SelectTrigger
               size="sm"
               className="w-full sm:w-56"
-              aria-label="Source control writing style"
+              aria-label={t("Source control writing style")}
             >
               <SelectValue>{MODE_OPTIONS[style.mode].label}</SelectValue>
             </SelectTrigger>
@@ -152,8 +153,8 @@ export function SourceControlWritingSettingsSection() {
                 }
               }}
               rows={4}
-              placeholder="Keep titles concise. Use short bullet points in descriptions."
-              aria-label="Custom source control writing instructions"
+              placeholder={t("Keep titles concise. Use short bullet points in descriptions.")}
+              aria-label={t("Custom source control writing instructions")}
             />
           </div>
         ) : null}
@@ -162,7 +163,9 @@ export function SourceControlWritingSettingsSection() {
       <SettingsRow
         serverScoped
         {...searchableSetting("follow-change-request-templates")}
-        description="Use the repository's template for change request descriptions when available."
+        description={t(
+          "Use the repository's template for change request descriptions when available.",
+        )}
         resetAction={
           style.followChangeRequestTemplates !== defaults.followChangeRequestTemplates ? (
             <SettingResetButton
@@ -187,7 +190,7 @@ export function SourceControlWritingSettingsSection() {
                 },
               })
             }
-            aria-label="Follow change request templates"
+            aria-label={t("Follow change request templates")}
           />
         }
       />
@@ -195,12 +198,14 @@ export function SourceControlWritingSettingsSection() {
       <SettingsRow
         serverScoped
         {...searchableSetting("source-control-writer-model")}
-        description="Model for source control text and branch or bookmark names. Off uses the global default."
+        description={t(
+          "Model for source control text and branch or bookmark names. Off uses the global default.",
+        )}
         control={
           <div className="flex flex-wrap items-center justify-end gap-2">
             {usesDedicatedModel && !canEnableDedicatedModel ? (
               <span className="text-sm text-muted-foreground">
-                No text generation providers available.
+                {t("No text generation providers available.")}
               </span>
             ) : null}
             {usesDedicatedModel && canEnableDedicatedModel ? (
@@ -244,7 +249,7 @@ export function SourceControlWritingSettingsSection() {
                     : null,
                 })
               }
-              aria-label="Use a separate source control writer model"
+              aria-label={t("Use a separate source control writer model")}
             />
           </div>
         }

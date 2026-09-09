@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { type ProviderInstanceId, type ServerProvider } from "@t3tools/contracts";
 import { memo } from "react";
 import { InfoIcon, XIcon } from "lucide-react";
@@ -111,7 +112,7 @@ export const ProviderStatusBanner = memo(function ProviderStatusBanner({
               size="xs"
               variant="link"
             >
-              Open provider setup
+              {t("Open provider setup")}
             </Button>
           ) : null}
         </div>

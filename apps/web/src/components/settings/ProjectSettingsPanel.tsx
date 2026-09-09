@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { useAtomValue } from "@effect/atom-react";
 import {
   isAtomCommandInterrupted,
@@ -223,7 +224,7 @@ export function ProjectSettingsPanel({
   if (members.length === 0)
     return (
       <p className="p-8 text-sm text-muted-foreground">
-        This project has no checkout on this machine.
+        {t("This project has no checkout on this machine.")}
       </p>
     );
   const scopedGroup = {
@@ -922,16 +923,18 @@ function ProjectDetail({
   return (
     <>
       <SettingsPageContainer className="gap-6">
-        <SettingsSection title="Project" hideTitle>
+        <SettingsSection title={t("Project")} hideTitle>
           <SettingsRow
-            title="Name"
-            description="The shared name for this project group in the sidebar and thread lists."
+            title={t("Name")}
+            description={t(
+              "The shared name for this project group in the sidebar and thread lists.",
+            )}
             control={
               <Input
                 key={`${group.projectKey}:${group.displayName}`}
                 size="sm"
                 className="w-full sm:w-64"
-                aria-label="Project name"
+                aria-label={t("Project name")}
                 defaultValue={group.displayName}
                 onChange={() => {
                   projectNameEditedRef.current = true;
@@ -948,7 +951,7 @@ function ProjectDetail({
             }
           />
           <SettingsRow
-            title="Project icon"
+            title={t("Project icon")}
             description={
               projectIcon?.kind === "lucide"
                 ? `${projectIcon.name} · ${projectIcon.color}`
@@ -972,28 +975,30 @@ function ProjectDetail({
                   size="sm"
                   variant="outline"
                   type="button"
-                  aria-label="Choose a project icon"
+                  aria-label={t("Choose a project icon")}
                   disabled={isSavingFavicon}
                   onClick={() => setIconPickerOpen(true)}
                 >
-                  Choose icon
+                  {t("Choose icon")}
                 </Button>
                 <Button
                   size="sm"
                   variant="outline"
                   type="button"
-                  aria-label="Choose a project icon file"
+                  aria-label={t("Choose a project icon file")}
                   disabled={isSavingFavicon}
                   onClick={() => setFaviconPickerOpen(true)}
                 >
-                  Choose file
+                  {t("Choose file")}
                 </Button>
               </div>
             }
           />
           <SettingsRow
-            title="Default merge method"
-            description="Pull requests in this project start with this method. It overrides the last method selected."
+            title={t("Default merge method")}
+            description={t(
+              "Pull requests in this project start with this method. It overrides the last method selected.",
+            )}
             resetAction={
               projectMergeMethod !== undefined ? (
                 <SettingResetButton
@@ -1011,7 +1016,7 @@ function ProjectDetail({
                   )
                 }
               >
-                <SelectTrigger aria-label="Default pull request merge method">
+                <SelectTrigger aria-label={t("Default pull request merge method")}>
                   <SelectValue>
                     {projectMergeMethod === undefined
                       ? "Last selected"
@@ -1019,7 +1024,7 @@ function ProjectDetail({
                   </SelectValue>
                 </SelectTrigger>
                 <SelectPopup align="end" alignItemWithTrigger={false}>
-                  <SelectItem value="inherit">Last selected</SelectItem>
+                  <SelectItem value="inherit">{t("Last selected")}</SelectItem>
                   <SelectItem value="merge">{PULL_REQUEST_MERGE_METHOD_LABELS.merge}</SelectItem>
                   <SelectItem value="squash">{PULL_REQUEST_MERGE_METHOD_LABELS.squash}</SelectItem>
                   <SelectItem value="rebase">{PULL_REQUEST_MERGE_METHOD_LABELS.rebase}</SelectItem>
@@ -1028,7 +1033,7 @@ function ProjectDetail({
             }
           />
           <SettingsRow
-            title="Model"
+            title={t("Model")}
             status={
               mixedModel
                 ? "Mixed defaults or overrides. Choosing a model updates all selected checkouts."
@@ -1045,7 +1050,7 @@ function ProjectDetail({
               group.memberProjects.some((member) => member.defaultModelSelection !== null) ? (
                 <SettingResetButton
                   label="project default model"
-                  tooltip="Reset to inherited model"
+                  tooltip={t("Reset to inherited model")}
                   onClick={() => setDefaultModel(null)}
                 />
               ) : null
@@ -1094,12 +1099,12 @@ function ProjectDetail({
                   />
                 </div>
               ) : (
-                <span className="text-sm text-muted-foreground">No providers available</span>
+                <span className="text-sm text-muted-foreground">{t("No providers available")}</span>
               )
             }
           />
           <SettingsRow
-            title="Workspace"
+            title={t("Workspace")}
             status={
               mixedWorkspace
                 ? "Mixed overrides. Choosing a workspace updates all selected checkouts."
@@ -1116,7 +1121,7 @@ function ProjectDetail({
               group.memberProjects.some((member) => member.defaultThreadEnvMode !== null) ? (
                 <SettingResetButton
                   label="project workspace default"
-                  tooltip="Reset to inherited workspace"
+                  tooltip={t("Reset to inherited workspace")}
                   onClick={() => setDefaultThreadEnvMode(null)}
                 />
               ) : null
@@ -1132,7 +1137,7 @@ function ProjectDetail({
                   }
                 }}
               >
-                <SelectTrigger size="sm" aria-label="New-thread workspace">
+                <SelectTrigger size="sm" aria-label={t("New-thread workspace")}>
                   <SelectValue>
                     {storedEnvMode === null
                       ? group.memberProjects.length > 1
@@ -1154,8 +1159,10 @@ function ProjectDetail({
             }
           />
           <SettingsRow
-            title="Automatically pull"
-            description="Keeps the default branch current in the background when the checkout has no local changes or commits."
+            title={t("Automatically pull")}
+            description={t(
+              "Keeps the default branch current in the background when the checkout has no local changes or commits.",
+            )}
             status={
               mixedAutoPull
                 ? "Mixed"
@@ -1167,7 +1174,7 @@ function ProjectDetail({
               autoPullOverridden ? (
                 <SettingResetButton
                   label="automatic pull"
-                  tooltip="Reset to inherited automatic pull setting"
+                  tooltip={t("Reset to inherited automatic pull setting")}
                   disabled={savingBrowserAccess}
                   onClick={() => void setAutoPull(undefined)}
                 />
@@ -1177,13 +1184,13 @@ function ProjectDetail({
               <Switch
                 checked={autoPull}
                 disabled={savingBrowserAccess}
-                aria-label="Automatically pull the default branch"
+                aria-label={t("Automatically pull the default branch")}
                 onCheckedChange={(enabled) => void setAutoPull(enabled)}
               />
             }
           />
           <SettingsRow
-            title="Agent browser access"
+            title={t("Agent browser access")}
             description={
               browserMixed
                 ? "Mixed defaults or overrides across selected checkouts."
@@ -1195,7 +1202,7 @@ function ProjectDetail({
               browserOverrides.some((value) => value !== undefined) ? (
                 <SettingResetButton
                   label="project browser access"
-                  tooltip="Reset to inherited browser access"
+                  tooltip={t("Reset to inherited browser access")}
                   disabled={savingBrowserAccess}
                   onClick={() => void setBrowserAccess(undefined)}
                 />
@@ -1219,7 +1226,7 @@ function ProjectDetail({
                     void setBrowserAccess(value === "enabled");
                 }}
               >
-                <SelectTrigger size="sm" aria-label="Project agent browser access">
+                <SelectTrigger size="sm" aria-label={t("Project agent browser access")}>
                   <SelectValue>
                     {browserMixed
                       ? "Mixed"
@@ -1231,20 +1238,20 @@ function ProjectDetail({
                   </SelectValue>
                 </SelectTrigger>
                 <SelectPopup align="end" alignItemWithTrigger={false}>
-                  <SelectItem value="inherit">Inherit defaults</SelectItem>
+                  <SelectItem value="inherit">{t("Inherit defaults")}</SelectItem>
                   <SelectItem value="enabled">On</SelectItem>
-                  <SelectItem value="disabled">Off</SelectItem>
+                  <SelectItem value="disabled">{t("Off")}</SelectItem>
                 </SelectPopup>
               </Select>
             }
           />
         </SettingsSection>
 
-        <SettingsSection title="Checkout">
+        <SettingsSection title={t("Checkout")}>
           {hasMultipleCheckouts ? (
             <SettingsRow
-              title="Checkout"
-              description="Actions and grouping belong to this checkout."
+              title={t("Checkout")}
+              description={t("Actions and grouping belong to this checkout.")}
               control={
                 <Select
                   value={selectedCheckout.physicalProjectKey}
@@ -1252,7 +1259,7 @@ function ProjectDetail({
                     if (value) setSelectedCheckoutKey(value);
                   }}
                 >
-                  <SelectTrigger size="sm" aria-label="Checkout">
+                  <SelectTrigger size="sm" aria-label={t("Checkout")}>
                     <SelectValue className="max-w-96 truncate">{selectedCheckoutLabel}</SelectValue>
                   </SelectTrigger>
                   <SelectPopup align="end" alignItemWithTrigger={false}>
@@ -1269,13 +1276,15 @@ function ProjectDetail({
             />
           ) : null}
           <SettingsRow
-            title="Project grouping"
-            description="How this checkout joins project groups in the sidebar. Changing it can move you to a different project group."
+            title={t("Project grouping")}
+            description={t(
+              "How this checkout joins project groups in the sidebar. Changing it can move you to a different project group.",
+            )}
             resetAction={
               selectedCheckoutGrouping !== "inherit" ? (
                 <SettingResetButton
                   label="project grouping"
-                  tooltip="Reset to inherited project grouping"
+                  tooltip={t("Reset to inherited project grouping")}
                   onClick={() => updateGroupingPreference(selectedCheckout, "inherit")}
                 />
               ) : null
@@ -1303,7 +1312,7 @@ function ProjectDetail({
                 </SelectTrigger>
                 <SelectPopup align="end" alignItemWithTrigger={false}>
                   <SelectItem hideIndicator value="inherit">
-                    Use global default
+                    {t("Use global default")}
                   </SelectItem>
                   <SelectItem hideIndicator value="repository">
                     {PROJECT_GROUPING_MODE_LABELS.repository}
@@ -1320,8 +1329,10 @@ function ProjectDetail({
           />
           {group.memberProjects.length > 1 ? (
             <SettingsRow
-              title="Remove checkout"
-              description="Removes this checkout and its threads from the project group. Files on disk are not touched."
+              title={t("Remove checkout")}
+              description={t(
+                "Removes this checkout and its threads from the project group. Files on disk are not touched.",
+              )}
               control={
                 <Button
                   size="sm"
@@ -1329,14 +1340,14 @@ function ProjectDetail({
                   onClick={() => void removeMembers([selectedCheckout])}
                 >
                   <Trash2Icon className="size-3.5" />
-                  Remove checkout
+                  {t("Remove checkout")}
                 </Button>
               }
             />
           ) : null}
           <div className="flex min-h-8 flex-col items-start gap-3 px-3 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-4">
             <div className="min-w-0">
-              <h3 className="text-base font-semibold text-foreground">Actions</h3>
+              <h3 className="text-base font-semibold text-foreground">{t("Actions")}</h3>
               <p className="text-pretty text-sm text-muted-foreground">
                 {scriptsInherited
                   ? "Inherited from machine defaults."
@@ -1347,7 +1358,7 @@ function ProjectDetail({
               {!scriptsInherited ? (
                 <SettingResetButton
                   label="project actions"
-                  tooltip="Reset to inherited actions"
+                  tooltip={t("Reset to inherited actions")}
                   disabled={isSavingScripts}
                   onClick={() => void persistScripts(() => null)}
                 />
@@ -1359,14 +1370,14 @@ function ProjectDetail({
                       <Button size="xs" variant="ghost" disabled={isSavingScripts} type="button" />
                     }
                   >
-                    Import scripts
+                    {t("Import scripts")}
                     <ChevronDownIcon className="size-3.5" />
                   </MenuTrigger>
                   <MenuPopup align="end" className="w-72">
                     <MenuGroup>
-                      <MenuGroupLabel>Import from t3.json</MenuGroupLabel>
+                      <MenuGroupLabel>{t("Import from t3.json")}</MenuGroupLabel>
                       <p className="px-2 pb-2 text-pretty text-sm text-muted-foreground">
-                        Add actions declared by this checkout without editing them first.
+                        {t("Add actions declared by this checkout without editing them first.")}
                       </p>
                     </MenuGroup>
                     <MenuSeparator />
@@ -1396,7 +1407,7 @@ function ProjectDetail({
                 }
               >
                 <PlusIcon className="size-3.5" />
-                Add action
+                {t("Add action")}
               </Button>
             </div>
           </div>
@@ -1409,13 +1420,15 @@ function ProjectDetail({
           {t3File.status === "invalid" ? (
             <SettingsRow
               title="t3.json is invalid"
-              description="A t3.json exists in this checkout but fails to parse, so every action and icon it declares is ignored. Check the JSON syntax and icon values."
+              description={t(
+                "A t3.json exists in this checkout but fails to parse, so every action and icon it declares is ignored. Check the JSON syntax and icon values.",
+              )}
               className="text-warning"
             />
           ) : null}
         </SettingsSection>
 
-        <SettingsSection title="Danger">
+        <SettingsSection title={t("Danger")}>
           <SettingsRow
             title={
               hasOtherMembers

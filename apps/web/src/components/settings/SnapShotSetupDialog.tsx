@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   isModifierPairShortcut,
   type DesktopSnapShotSetupAction,
@@ -152,11 +153,11 @@ function MacPermissionRow({
       {granted ? (
         <span className="flex items-center gap-1 text-xs text-success">
           <CircleCheckIcon className="size-4" aria-hidden="true" />
-          Allowed
+          {t("Allowed")}
         </span>
       ) : (
         <Button size="xs" variant="outline" disabled={busy} onClick={onAllow}>
-          Allow
+          {t("Allow")}
         </Button>
       )}
     </div>
@@ -360,15 +361,15 @@ export function SnapShotSetupDialog({
                   <div className="space-y-2">
                     <MacPermissionRow
                       icon={<ScreenRecordingIcon />}
-                      title="Screen Recording"
-                      description="Capture the window you're using."
+                      title={t("Screen Recording")}
+                      description={t("Capture the window you're using.")}
                       granted={macPermissions.screenRecording}
                       busy={busy}
                       onAllow={() => void onAction("allow-screen-recording")}
                     />
                     <MacPermissionRow
                       icon={<AccessibilityPermissionIcon />}
-                      title="Accessibility"
+                      title={t("Accessibility")}
                       description={
                         includeAccessibility
                           ? "Include text and controls from the captured app."
@@ -387,7 +388,7 @@ export function SnapShotSetupDialog({
                     disabled={busy}
                     onClick={() => void onAction(installHelper)}
                   >
-                    Reinstall helper
+                    {t("Reinstall helper")}
                   </Button>
                 ) : null}
               </>
@@ -425,17 +426,17 @@ export function SnapShotSetupDialog({
             )}
             {step === "shortcut" && !accessReady ? (
               <p role="alert" className="text-destructive">
-                Capture needs attention. Go back to check access.
+                {t("Capture needs attention. Go back to check access.")}
               </p>
             ) : null}
             {error ? (
               <p role="alert" className="text-destructive">
-                Couldn't finish this step. Try again or check Advanced for help.
+                {t("Couldn't finish this step. Try again or check Advanced for help.")}
               </p>
             ) : null}
             {details.length > 0 || (step === "access" && (backend === "gnome" || helperBackend)) ? (
               <details className="text-xs text-muted-foreground">
-                <summary className="cursor-pointer">Advanced</summary>
+                <summary className="cursor-pointer">{t("Advanced")}</summary>
                 <div className="mt-3 space-y-3">
                   {details.map((detail) => (
                     <p key={detail} className="break-words">
@@ -443,7 +444,7 @@ export function SnapShotSetupDialog({
                     </p>
                   ))}
                   {step === "access" && (backend === "gnome" || helperBackend) ? (
-                    <p>Included with T3 Code. No download needed.</p>
+                    <p>{t("Included with T3 Code. No download needed.")}</p>
                   ) : null}
                   {step === "access" && backend === "gnome" && extension?.status === "enabled" ? (
                     <Button
@@ -452,7 +453,7 @@ export function SnapShotSetupDialog({
                       disabled={busy}
                       onClick={() => void onAction("disable-extension")}
                     >
-                      Disable extension
+                      {t("Disable extension")}
                     </Button>
                   ) : null}
                   {step === "access" && helperBackend && helper?.status !== "not-installed" ? (
@@ -462,7 +463,7 @@ export function SnapShotSetupDialog({
                       disabled={busy}
                       onClick={() => void onAction(removeHelper)}
                     >
-                      Remove capture helper
+                      {t("Remove capture helper")}
                     </Button>
                   ) : null}
                 </div>
@@ -473,7 +474,7 @@ export function SnapShotSetupDialog({
         <WizardFooter>
           {step !== "access" ? (
             <Button variant="ghost" disabled={busy} onClick={() => changeStep("access")}>
-              Back
+              {t("Back")}
             </Button>
           ) : null}
           <Button variant="ghost" disabled={busy} onClick={() => void onClose(false)}>

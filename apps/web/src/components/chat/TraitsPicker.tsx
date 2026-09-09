@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   type ProviderDriverKind,
   type ProviderInstanceId,
@@ -98,7 +99,7 @@ function DefaultBadge() {
       variant="outline"
       className="inline-flex h-4 w-fit min-w-0 items-center justify-center gap-0 border-border/70 bg-muted/60 px-1.5 py-0 font-semibold text-[10px] text-muted-foreground leading-none sm:h-4"
     >
-      Default
+      {t("Default")}
     </Badge>
   );
 }
@@ -602,7 +603,7 @@ export const TraitsPicker = memo(function TraitsPicker({
               : "text-foreground",
         )}
       />
-      <span className="sr-only">Fast mode on</span>
+      <span className="sr-only">{t("Fast mode on")}</span>
     </>
   ) : null;
 

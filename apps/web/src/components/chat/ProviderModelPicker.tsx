@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   ANTIGRAVITY_DEFAULT_MODEL,
   type ProviderInstanceId,
@@ -212,7 +213,7 @@ export const ProviderModelPicker = memo(function ProviderModelPicker(props: {
           </Tooltip>
           {selectedModel?.isUnavailable ? (
             <Badge variant="outline" size="sm">
-              Unavailable
+              {t("Unavailable")}
             </Badge>
           ) : null}
         </span>

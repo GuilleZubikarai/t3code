@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { PreviewAnnotationPayload } from "@t3tools/contracts";
 import { Frame, MousePointerClick, Paintbrush, PenLine, RotateCcw, X } from "lucide-react";
 import type { ReactNode } from "react";
@@ -169,7 +170,7 @@ export function ComposerPreviewAnnotationCards({
             <Button
               size="icon-micro"
               variant="ghost-muted"
-              aria-label="Remove preview annotation"
+              aria-label={t("Remove preview annotation")}
               className="absolute right-1.5 top-1.5 [--control-icon-color:currentColor] rounded text-icon-muted hover:bg-muted"
               onClick={() => onRemove(annotation.id)}
             >

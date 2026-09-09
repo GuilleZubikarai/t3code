@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
@@ -68,23 +69,25 @@ export function readAntigravityAuthMethod(config: unknown): AntigravityAuthMetho
 /** Setup state belongs to the selected environment and is never saved in client settings. */
 export function ProviderSetupSection(props: ProviderSetupSectionProps) {
   return (
-    <section aria-label="Antigravity setup" className="grid gap-3 text-xs">
+    <section aria-label={t("Antigravity setup")} className="grid gap-3 text-xs">
       <p>Antigravity runs on {props.environmentLabel}.</p>
       {!props.enabled ? (
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-muted-foreground">Enable it to use it in threads.</span>
+          <span className="text-muted-foreground">{t("Enable it to use it in threads.")}</span>
           {!props.readOnly ? (
             <Button size="xs" variant="outline" onClick={props.onEnable}>
-              Enable Antigravity
+              {t("Enable Antigravity")}
             </Button>
           ) : null}
         </div>
       ) : null}
       {props.readOnly ? (
-        <p className="text-muted-foreground">This connection cannot change provider setup.</p>
+        <p className="text-muted-foreground">
+          {t("This connection cannot change provider setup.")}
+        </p>
       ) : props.provider?.setup === undefined ? (
         <p className="text-muted-foreground">
-          Update this environment to install Antigravity and sign in with Google here.
+          {t("Update this environment to install Antigravity and sign in with Google here.")}
         </p>
       ) : (
         <ProviderSetupActions
@@ -264,7 +267,7 @@ function ProviderSetupActions({
   return (
     <div className="grid gap-3">
       <div className="grid gap-2">
-        <p className="font-medium">Runtime</p>
+        <p className="font-medium">{t("Runtime")}</p>
         <p role="status" className="text-muted-foreground">
           {installationStatusMessage}
         </p>
@@ -272,7 +275,7 @@ function ProviderSetupActions({
         installation.totalBytes !== null &&
         installation.totalBytes > 0 ? (
           <progress
-            aria-label="Antigravity download"
+            aria-label={t("Antigravity download")}
             className="h-1 w-full accent-foreground"
             value={installation.downloadedBytes}
             max={installation.totalBytes}
@@ -312,7 +315,7 @@ function ProviderSetupActions({
                 );
               }}
             >
-              Cancel installation
+              {t("Cancel installation")}
             </Button>
           ) : !installActive && provider.setup?.canInstall ? (
             <Button
@@ -339,7 +342,7 @@ function ProviderSetupActions({
               disabled={actionsDisabled || authActive}
               onClick={() => void removeRuntime()}
             >
-              Remove downloaded runtime
+              {t("Remove downloaded runtime")}
             </Button>
           ) : null}
         </div>
@@ -354,7 +357,7 @@ function ProviderSetupActions({
           <>
             <div className="flex flex-wrap gap-2">
               <Button size="xs" variant="outline" onClick={() => void openSignInPage()}>
-                Open sign-in page
+                {t("Open sign-in page")}
               </Button>
               <Button size="xs" variant="ghost" onClick={() => void copySignInLink()}>
                 {copiedFlowId === auth?.flowId ? "Link copied" : "Copy sign-in link"}
@@ -380,7 +383,7 @@ function ProviderSetupActions({
               }}
             >
               <label htmlFor={`provider-callback-${instanceId}`}>
-                If the final localhost page does not load, paste its full URL here.
+                {t("If the final localhost page does not load, paste its full URL here.")}
               </label>
               <Input
                 id={`provider-callback-${instanceId}`}
@@ -403,13 +406,13 @@ function ProviderSetupActions({
                 className="w-fit"
                 disabled={actionsDisabled || !callbackUrl.trim()}
               >
-                Continue
+                {t("Continue")}
               </Button>
             </form>
           </>
         ) : auth?.phase === "waiting" ? (
           <p className="text-muted-foreground">
-            Sign-in is open in another client. Complete or cancel it there.
+            {t("Sign-in is open in another client. Complete or cancel it there.")}
           </p>
         ) : null}
         <div className="flex flex-wrap gap-2">
@@ -426,7 +429,7 @@ function ProviderSetupActions({
                 );
               }}
             >
-              Cancel sign-in
+              {t("Cancel sign-in")}
             </Button>
           ) : !authActive && !authenticated && provider.setup?.canAuthenticate ? (
             <Button
@@ -473,7 +476,7 @@ function ProviderSetupActions({
                 installQuery.refresh();
               }}
             >
-              Retry setup status
+              {t("Retry setup status")}
             </Button>
           ) : null}
         </div>

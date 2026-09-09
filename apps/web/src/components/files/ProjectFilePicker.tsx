@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { useAtomValue } from "@effect/atom-react";
 import { useMemo, useState, type ReactNode } from "react";
 
@@ -53,7 +54,7 @@ function getEmptyStateMessage(query: string, error: string | null, isPending: bo
 function EmptyProjectFilePicker() {
   return (
     <CommandPaletteContent
-      aria-label="File picker"
+      aria-label={t("File picker")}
       escapeLabel="Back"
       footerActionLabel="Open file"
       inputProps={{ disabled: true, placeholder: "Search files…" }}
@@ -62,7 +63,7 @@ function EmptyProjectFilePicker() {
       value=""
     >
       <div className="py-10 text-center text-sm text-muted-foreground">
-        Open a project to search its files.
+        {t("Open a project to search its files.")}
       </div>
     </CommandPaletteContent>
   );
@@ -117,7 +118,7 @@ function OpenProjectFilePicker(props: ProjectFilePickerProps & { target: ActiveP
 
   return (
     <CommandPaletteContent
-      aria-label="File picker"
+      aria-label={t("File picker")}
       autoHighlight="always"
       escapeLabel="Back"
       footerActionLabel="Open file"

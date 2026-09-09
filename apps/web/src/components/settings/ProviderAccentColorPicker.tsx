@@ -1,4 +1,5 @@
-"use client";
+import { t } from "~/i18n/t";
+("use client");
 
 import { PipetteIcon, XIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
@@ -163,7 +164,7 @@ function ProviderCustomColorPanel(props: {
           }}
           onBlur={() => setHexDraft(null)}
           className="h-8 rounded-md border border-input bg-background px-2 font-mono text-xs text-foreground outline-none transition-colors focus:border-ring"
-          aria-label="Custom hex accent color"
+          aria-label={t("Custom hex accent color")}
           spellCheck={false}
         />
       </div>
@@ -214,7 +215,7 @@ function ProviderCustomColorPicker(props: {
               disabled={!props.value}
             >
               <XIcon className="size-3.5" aria-hidden />
-              Clear color
+              {t("Clear color")}
             </Button>
           }
         />
@@ -313,7 +314,7 @@ export function ProviderAccentColorPicker(props: {
 
   return (
     <div className="grid gap-2">
-      <span className="text-xs font-medium text-foreground">Accent color</span>
+      <span className="text-xs font-medium text-foreground">{t("Accent color")}</span>
       {picker}
       {description ? <span className="text-xs text-muted-foreground">{description}</span> : null}
     </div>

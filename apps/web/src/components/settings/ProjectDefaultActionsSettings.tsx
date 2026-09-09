@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { EnvironmentId } from "@t3tools/contracts";
 import { DEFAULT_RESOLVED_KEYBINDINGS } from "@t3tools/shared/keybindings";
 import { PlusIcon } from "lucide-react";
@@ -50,20 +51,22 @@ export function ProjectDefaultActionsSettings({
   );
 
   return (
-    <SettingsSection title="Actions">
+    <SettingsSection title={t("Actions")}>
       <SettingsRow
-        title="Import scripts"
+        title={t("Import scripts")}
         aria-disabled
-        description="Select a project to import actions from its checkout's t3.json."
+        description={t("Select a project to import actions from its checkout's t3.json.")}
         control={
           <Button size="xs" variant="ghost" disabled>
-            Import scripts
+            {t("Import scripts")}
           </Button>
         }
       />
       <SettingsRow
-        title="Default actions"
-        description="Available in every inheriting checkout. Commands run in that checkout or its worktree."
+        title={t("Default actions")}
+        description={t(
+          "Available in every inheriting checkout. Commands run in that checkout or its worktree.",
+        )}
         resetAction={
           targets.some(
             (target) => (target.serverConfig?.settings.defaultProjectScripts.length ?? 0) > 0,
@@ -83,14 +86,16 @@ export function ProjectDefaultActionsSettings({
             onClick={() => setRequest({ scriptId: null, initial: EMPTY_PROJECT_SCRIPT_INPUT })}
           >
             <PlusIcon className="size-3.5" />
-            Add action
+            {t("Add action")}
           </Button>
         }
       />
       {mixed ? (
         <SettingsRow
-          title="Different actions across machines"
-          description="Select a machine to edit its actions. Adding an action applies to all selected connected machines."
+          title={t("Different actions across machines")}
+          description={t(
+            "Select a machine to edit its actions. Adding an action applies to all selected connected machines.",
+          )}
         />
       ) : (
         <ProjectActionsList

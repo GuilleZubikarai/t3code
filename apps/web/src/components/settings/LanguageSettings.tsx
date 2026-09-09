@@ -18,10 +18,10 @@ const LOCALE_LABELS: Readonly<Record<LocalePreference, string>> = {
 export function LanguageSettingsSection() {
   const preference = useLocalePreference();
   return (
-    <SettingsSection id="language" title="Language">
+    <SettingsSection id="language" title={t("Language")}>
       <SettingsRow
         {...searchableSetting("app-language")}
-        description="Interface language. System follows your browser or operating system."
+        description={t("Interface language. System follows your browser or operating system.")}
         control={
           <Select
             value={preference}

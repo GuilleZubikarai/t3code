@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   isModifierPairShortcut,
   type DesktopCaptureConfigApplied,
@@ -142,13 +143,13 @@ export function CaptureShortcutConfig({
     <div className="space-y-4 text-sm">
       {!result ? (
         <div className="flex items-center justify-between gap-3">
-          <span>Shortcut</span>
+          <span>{t("Shortcut")}</span>
           {recorder.input}
         </div>
       ) : null}
       {recorder.recording ? (
         <p role="status" className="text-xs text-muted-foreground">
-          Press your shortcut. Esc cancels.
+          {t("Press your shortcut. Esc cancels.")}
         </p>
       ) : null}
       {result ? (
@@ -173,7 +174,7 @@ export function CaptureShortcutConfig({
           {diff ? (
             <div
               className="max-h-80 overflow-auto rounded-lg border text-xs"
-              aria-label="Shortcut changes"
+              aria-label={t("Shortcut changes")}
             >
               <FileDiff
                 fileDiff={diff}
@@ -187,7 +188,7 @@ export function CaptureShortcutConfig({
           ) : null}
           {changed ? (
             <p className="text-xs text-muted-foreground">
-              Only these changes will be saved. We'll keep a backup.
+              {t("Only these changes will be saved. We'll keep a backup.")}
             </p>
           ) : null}
           <div className="flex gap-2">
@@ -210,7 +211,7 @@ export function CaptureShortcutConfig({
               </Button>
             ) : null}
             <Button variant="ghost" disabled={actionBusy} onClick={() => setPreview(null)}>
-              Cancel
+              {t("Cancel")}
             </Button>
           </div>
         </>
@@ -229,7 +230,7 @@ export function CaptureShortcutConfig({
           </Button>
           {!supported ? (
             <p className="text-xs text-muted-foreground">
-              Update T3 Code to finish setting up your shortcut.
+              {t("Update T3 Code to finish setting up your shortcut.")}
             </p>
           ) : null}
         </>
@@ -247,22 +248,22 @@ export function CaptureShortcutConfig({
         </p>
       ) : null}
       <details className="text-xs text-muted-foreground">
-        <summary className="cursor-pointer">Advanced</summary>
+        <summary className="cursor-pointer">{t("Advanced")}</summary>
         <div className="mt-3 space-y-3">
           {error?.detail || result?.warning ? (
             <div className="space-y-1">
-              <p className="font-medium text-foreground">Troubleshooting</p>
+              <p className="font-medium text-foreground">{t("Troubleshooting")}</p>
               <p className="break-words">{error?.detail ?? result?.warning}</p>
             </div>
           ) : null}
           <div className="space-y-1">
-            <p className="font-medium text-foreground">Settings file</p>
+            <p className="font-medium text-foreground">{t("Settings file")}</p>
             <p className="break-all font-mono">
               {preview?.path ??
                 state.shortcutConfigPath ??
                 (niri ? "~/.config/niri/config.kdl" : "~/.config/hypr/hyprland.conf")}
             </p>
-            {niri ? <p>T3 Code also reads any files included by this file.</p> : null}
+            {niri ? <p>{t("T3 Code also reads any files included by this file.")}</p> : null}
             {preview && preview.resolvedPath !== preview.path ? (
               <p className="break-all">Linked to {preview.resolvedPath}. The link will be kept.</p>
             ) : null}
@@ -291,7 +292,7 @@ export function CaptureShortcutConfig({
                 disabled={actionBusy || !supported}
                 onClick={() => void read()}
               >
-                Review changes
+                {t("Review changes")}
               </Button>
             ) : null}
           </div>
@@ -302,7 +303,7 @@ export function CaptureShortcutConfig({
               : "On Omarchy, use your own bindings file, not its defaults."}
           </p>
           {result?.backupPath ? <p className="break-all">Backup: {result.backupPath}</p> : null}
-          <p className="font-medium text-foreground">Manual setup</p>
+          <p className="font-medium text-foreground">{t("Manual setup")}</p>
           <p>
             {niri
               ? "Paste this inside binds { … } in your Niri config, then save."

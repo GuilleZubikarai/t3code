@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { EnvironmentId, ServerSelfUpdateCapability } from "@t3tools/contracts";
 import type { ServerUpdateStage, ServerUpdateState } from "@t3tools/client-runtime/state/server";
 import {
@@ -246,7 +247,7 @@ export function ServerUpdateAction({
   if (selfUpdate === "desktop-managed" && !desktopAppUpdate) {
     return (
       <span className="text-muted-foreground text-xs">
-        Update the desktop app on that machine to update this server.
+        {t("Update the desktop app on that machine to update this server.")}
       </span>
     );
   }
@@ -255,7 +256,7 @@ export function ServerUpdateAction({
     const command = manualServerUpdateCommand(targetVersion);
     return (
       <Button size={size} variant={variant} onClick={() => copyToClipboard(command, { command })}>
-        Copy update command
+        {t("Copy update command")}
       </Button>
     );
   }

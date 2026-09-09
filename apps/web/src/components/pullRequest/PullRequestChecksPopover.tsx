@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type {
   EnvironmentId,
   PullRequestCheck,
@@ -60,7 +61,7 @@ function ChecksBody({
 }) {
   const openLink = useOpenLink(threadRef);
   if (checks.length === 0) {
-    return <p className="text-muted-foreground text-xs">No checks reported</p>;
+    return <p className="text-muted-foreground text-xs">{t("No checks reported")}</p>;
   }
   return (
     <ul className="flex flex-col gap-1">
@@ -90,7 +91,7 @@ function ChecksBody({
                 });
               }}
             >
-              Details
+              {t("Details")}
             </button>
           )}
         </li>

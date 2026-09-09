@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { PlusIcon } from "lucide-react";
 import { useCallback } from "react";
 
@@ -16,15 +17,15 @@ export function NoProjectsHero() {
           <div className="w-full max-w-lg px-8 py-12">
             <EmptyHeader className="max-w-none">
               <EmptyTitle className="text-foreground text-2xl sm:text-3xl">
-                What should we work on?
+                {t("What should we work on?")}
               </EmptyTitle>
               <EmptyDescription className="mt-2 text-sm text-muted-foreground/78">
-                Add a project to start your first thread.
+                {t("Add a project to start your first thread.")}
               </EmptyDescription>
               <div className="mt-6 flex justify-center">
                 <Button size="sm" onClick={openAddProject}>
                   <PlusIcon className="size-4" />
-                  Add project
+                  {t("Add project")}
                 </Button>
               </div>
             </EmptyHeader>

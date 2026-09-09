@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { findErrorTraceId } from "@t3tools/client-runtime/errors";
 import {
   isAtomCommandInterrupted,
@@ -66,7 +67,7 @@ export function T3ConnectEnvironmentRow(props: {
                 className="text-[0.8125rem]"
                 disabled={props.mutationPending}
               >
-                Deregister
+                {t("Deregister")}
               </Button>
             }
           />
@@ -80,7 +81,7 @@ export function T3ConnectEnvironmentRow(props: {
               aria-label={`Confirm deregistration of ${environment.label}`}
             >
               <h4 className="text-[0.8125rem] leading-[1.125rem] font-semibold text-foreground">
-                Deregister server
+                {t("Deregister server")}
               </h4>
               <p className="mt-1 text-[0.8125rem] leading-[1.125rem] text-muted-foreground">
                 “{environment.label}” will be removed from this account.
@@ -97,7 +98,7 @@ export function T3ConnectEnvironmentRow(props: {
                   disabled={props.mutationPending}
                   onClick={() => props.onConfirmationChange(false)}
                 >
-                  Cancel
+                  {t("Cancel")}
                 </Button>
                 <Button
                   size="sm"
@@ -200,8 +201,10 @@ export function T3ConnectUserProfilePage() {
 
   return (
     <ClerkUserProfilePage
-      title="T3 Connect"
-      description="Environments registered to your account. Connections on this device are managed in Settings."
+      title={t("T3 Connect")}
+      description={t(
+        "Environments registered to your account. Connections on this device are managed in Settings.",
+      )}
       action={
         <ClerkUserProfileRefreshButton
           disabled={deregisteringEnvironmentId !== null}
@@ -214,7 +217,7 @@ export function T3ConnectUserProfilePage() {
         {environmentsState.error ? (
           <div className="mb-4 border-t border-destructive/35 py-3 text-[0.8125rem]" role="alert">
             <p className="font-medium text-destructive-foreground">
-              Could not load T3 Connect environments
+              {t("Could not load T3 Connect environments")}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">{environmentsState.error}</p>
           </div>
@@ -246,10 +249,12 @@ export function T3ConnectUserProfilePage() {
             </EmptyMedia>
             <EmptyHeader>
               <EmptyTitle className="text-[1.0625rem] leading-6">
-                No T3 Connect environments
+                {t("No T3 Connect environments")}
               </EmptyTitle>
               <EmptyDescription className="text-[0.8125rem] leading-[1.125rem]">
-                Link an environment from its local Settings to make it available through T3 Connect.
+                {t(
+                  "Link an environment from its local Settings to make it available through T3 Connect.",
+                )}
               </EmptyDescription>
             </EmptyHeader>
           </Empty>

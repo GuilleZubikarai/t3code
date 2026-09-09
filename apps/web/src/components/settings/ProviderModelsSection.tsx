@@ -1,4 +1,5 @@
-"use client";
+import { t } from "~/i18n/t";
+("use client");
 
 import { ArrowDownIcon, ArrowUpIcon, PencilIcon, PlusIcon, StarIcon, XIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -344,7 +345,7 @@ export function ProviderModelsSection({
             >
               <ArrowUpIcon className="size-3" />
             </TooltipTrigger>
-            <TooltipPopup side="top">Move up</TooltipPopup>
+            <TooltipPopup side="top">{t("Move up")}</TooltipPopup>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger
@@ -360,7 +361,7 @@ export function ProviderModelsSection({
             >
               <ArrowDownIcon className="size-3" />
             </TooltipTrigger>
-            <TooltipPopup side="top">Move down</TooltipPopup>
+            <TooltipPopup side="top">{t("Move down")}</TooltipPopup>
           </Tooltip>
         </>
       ) : null}
@@ -381,7 +382,7 @@ export function ProviderModelsSection({
             >
               <PencilIcon className="size-3" />
             </TooltipTrigger>
-            <TooltipPopup side="top">Edit name and options</TooltipPopup>
+            <TooltipPopup side="top">{t("Edit name and options")}</TooltipPopup>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger
@@ -396,7 +397,7 @@ export function ProviderModelsSection({
             >
               <XIcon className="size-3" />
             </TooltipTrigger>
-            <TooltipPopup side="top">Remove custom model</TooltipPopup>
+            <TooltipPopup side="top">{t("Remove custom model")}</TooltipPopup>
           </Tooltip>
         </>
       ) : null}
@@ -495,11 +496,11 @@ export function ProviderModelsSection({
           <Input
             value={filter}
             onChange={(event) => setFilter(event.target.value)}
-            placeholder="Filter models"
+            placeholder={t("Filter models")}
             size="sm"
             className="w-56"
             spellCheck={false}
-            aria-label="Filter models"
+            aria-label={t("Filter models")}
           />
         ) : null}
         <span className="text-xs text-muted-foreground">
@@ -582,7 +583,7 @@ export function ProviderModelsSection({
               Add
             </Button>
             <Button size="sm" variant="ghost" onClick={cancelAdd}>
-              Cancel
+              {t("Cancel")}
             </Button>
           </div>
         </div>
@@ -595,7 +596,7 @@ export function ProviderModelsSection({
           onClick={() => setIsAdding(true)}
         >
           <PlusIcon className="size-3" />
-          Add custom model
+          {t("Add custom model")}
         </Button>
       )}
 

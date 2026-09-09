@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   ENVIRONMENT_MACHINE_KINDS,
   isEnvironmentMachineKind,
@@ -108,7 +109,7 @@ export function EnvironmentIconPicker({
 
   const select = (
     <Select value={value} onValueChange={handleValueChange} disabled={lock !== null}>
-      <SelectTrigger size={size} className="w-full sm:w-52" aria-label="Environment icon">
+      <SelectTrigger size={size} className="w-full sm:w-52" aria-label={t("Environment icon")}>
         <SelectValue>
           <span className="flex min-w-0 items-center gap-2">
             <EnvironmentMachineIcon kind={resolved} className="size-3.5 shrink-0" />

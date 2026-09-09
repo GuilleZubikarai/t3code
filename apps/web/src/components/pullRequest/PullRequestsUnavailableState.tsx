@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { RefreshIcon } from "~/components/ui/refresh-icon";
 import { ExternalLinkIcon, GitPullRequestIcon } from "lucide-react";
 
@@ -46,7 +47,7 @@ export function PullRequestsUnavailableState({
               aria-busy={refreshing}
             >
               <RefreshIcon className="size-3.5" refreshing={refreshing} />
-              Retry
+              {t("Retry")}
             </Button>
           ) : null}
           {gitHubUrl ? (
@@ -56,7 +57,7 @@ export function PullRequestsUnavailableState({
               render={<a href={gitHubUrl} target="_blank" rel="noopener noreferrer" />}
             >
               <ExternalLinkIcon aria-hidden className="size-3.5" />
-              Open on GitHub
+              {t("Open on GitHub")}
             </Button>
           ) : null}
         </EmptyContent>

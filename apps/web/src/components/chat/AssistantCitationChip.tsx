@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { AssistantCitation } from "@t3tools/contracts";
 import { serializeAssistantCitation } from "@t3tools/shared/assistantCitations";
 import { Link, useNavigate } from "@tanstack/react-router";
@@ -125,7 +126,7 @@ export function AssistantCitationChip({
       ) : (
         <Tooltip>
           <TooltipTrigger render={chatSourceLink} />
-          <TooltipPopup side="top">View source</TooltipPopup>
+          <TooltipPopup side="top">{t("View source")}</TooltipPopup>
         </Tooltip>
       )}
       {commentEditor ? (
@@ -146,7 +147,7 @@ export function AssistantCitationChip({
                 commentInputRef.current?.focus({ preventScroll: true });
                 return false;
               }}
-              aria-label="Edit citation comment"
+              aria-label={t("Edit citation comment")}
               className="w-72 max-w-[calc(100vw-1rem)]"
               viewportClassName="p-3"
               onPointerDown={(event) => event.stopPropagation()}
@@ -185,7 +186,7 @@ export function AssistantCitationChip({
         <button
           type="button"
           onClick={onRemove}
-          aria-label="Remove assistant citation"
+          aria-label={t("Remove assistant citation")}
           className={cn(
             COMPOSER_INLINE_CHIP_DISMISS_BUTTON_CLASS_NAME,
             "text-primary/85 hover:bg-primary/10 hover:text-primary",

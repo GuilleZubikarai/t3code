@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { type ServerLifecycleWelcomePayload } from "@t3tools/contracts";
 import { scopedProjectKey, scopeProjectRef } from "@t3tools/client-runtime/environment";
 import { squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
@@ -339,22 +340,24 @@ function RootRouteErrorView({ error, reset }: ErrorComponentProps) {
           {APP_DISPLAY_NAME}
         </p>
         <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
-          Something went wrong.
+          {t("Something went wrong.")}
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{message}</p>
 
         <div className="mt-5 flex flex-wrap gap-2">
           <Button size="sm" onClick={() => reset()}>
-            Try again
+            {t("Try again")}
           </Button>
           <Button size="sm" variant="outline" onClick={() => window.location.reload()}>
-            Reload app
+            {t("Reload app")}
           </Button>
           <CopyErrorButton report={report} />
         </div>
 
         <div className="mt-5 overflow-hidden rounded-lg border border-border/70 bg-background/55">
-          <p className="px-3 py-1.5 text-xs font-medium text-muted-foreground">Error report</p>
+          <p className="px-3 py-1.5 text-xs font-medium text-muted-foreground">
+            {t("Error report")}
+          </p>
           <pre className="max-h-64 overflow-auto border-t border-border/70 bg-background/80 px-3 py-2 text-xs whitespace-pre-wrap text-foreground/85">
             {report}
           </pre>

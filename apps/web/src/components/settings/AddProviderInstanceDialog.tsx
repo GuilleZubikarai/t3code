@@ -1,4 +1,5 @@
-"use client";
+import { t } from "~/i18n/t";
+("use client");
 
 import { Radio as RadioPrimitive } from "@base-ui/react/radio";
 import { CheckIcon } from "lucide-react";
@@ -225,7 +226,7 @@ export function AddProviderInstanceDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <WizardPopup>
         <WizardHeader
-          title="Add provider instance"
+          title={t("Add provider instance")}
           description={
             <>
               Configure an additional provider instance on {environmentLabel} — for example, a
@@ -244,7 +245,7 @@ export function AddProviderInstanceDialog({
         <WizardPanel>
           <div className={cn("grid gap-2", wizardStep !== 0 && "hidden")}>
             <div id="add-instance-driver-label" className="text-sm font-medium text-foreground">
-              Driver
+              {t("Driver")}
             </div>
             <RadioGroup
               value={driver}
@@ -294,7 +295,7 @@ export function AddProviderInstanceDialog({
                       {option.label}
                     </span>
                     <Badge variant="warning" size="sm">
-                      Coming Soon
+                      {t("Coming Soon")}
                     </Badge>
                   </RadioPrimitive.Root>
                 );
@@ -303,7 +304,7 @@ export function AddProviderInstanceDialog({
           </div>
 
           <label className={cn("grid gap-2", wizardStep !== 1 && "hidden")}>
-            <span className="text-xs font-medium text-foreground">Label</span>
+            <span className="text-xs font-medium text-foreground">{t("Label")}</span>
             <Input
               className="bg-background"
               placeholder="e.g. Work"
@@ -311,12 +312,12 @@ export function AddProviderInstanceDialog({
               onChange={(event) => setLabel(event.target.value)}
             />
             <span className="text-[11px] text-muted-foreground">
-              Shown in the provider list. Optional.
+              {t("Shown in the provider list. Optional.")}
             </span>
           </label>
 
           <label className={cn("grid gap-2", wizardStep !== 1 && "hidden")}>
-            <span className="text-xs font-medium text-foreground">Instance ID</span>
+            <span className="text-xs font-medium text-foreground">{t("Instance ID")}</span>
             <Input
               className="bg-background"
               placeholder={`${driver}_work`}
@@ -336,13 +337,13 @@ export function AddProviderInstanceDialog({
           </label>
 
           <div className={cn("grid gap-2", wizardStep !== 1 && "hidden")}>
-            <span className="text-xs font-medium text-foreground">Accent color</span>
+            <span className="text-xs font-medium text-foreground">{t("Accent color")}</span>
             <div className="flex min-w-0 flex-wrap items-center gap-2">
               <input
                 type="color"
                 value={normalizeProviderAccentColor(accentColor) ?? PROVIDER_ACCENT_SWATCHES[0]}
                 onChange={(event) => setAccentColor(event.target.value)}
-                aria-label="Provider instance accent color"
+                aria-label={t("Provider instance accent color")}
                 className="h-8 w-10 cursor-pointer rounded-xl border border-input bg-background p-0.5"
               />
               <div className="flex flex-wrap gap-1.5">
@@ -373,12 +374,12 @@ export function AddProviderInstanceDialog({
                   className="text-muted-foreground"
                   onClick={() => setAccentColor("")}
                 >
-                  Clear
+                  {t("Clear")}
                 </Button>
               ) : null}
             </div>
             <span className="text-[11px] text-muted-foreground">
-              Optional marker shown in the picker.
+              {t("Optional marker shown in the picker.")}
             </span>
           </div>
 
@@ -395,7 +396,7 @@ export function AddProviderInstanceDialog({
           ) : wizardStep === 2 ? (
             <div className="grid gap-2">
               <p className="text-sm text-muted-foreground">
-                This driver has no required configuration. You can add the instance now.
+                {t("This driver has no required configuration. You can add the instance now.")}
               </p>
             </div>
           ) : null}
@@ -415,9 +416,9 @@ export function AddProviderInstanceDialog({
             {wizardStep === 0 ? "Cancel" : "Back"}
           </Button>
           {wizardStep < ADD_PROVIDER_WIZARD_STEPS.length - 1 ? (
-            <Button onClick={() => navigateToStep(wizardStep + 1)}>Next</Button>
+            <Button onClick={() => navigateToStep(wizardStep + 1)}>{t("Next")}</Button>
           ) : (
-            <Button onClick={handleSave}>Add instance</Button>
+            <Button onClick={handleSave}>{t("Add instance")}</Button>
           )}
         </WizardFooter>
       </WizardPopup>

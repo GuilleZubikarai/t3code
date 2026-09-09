@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 /**
  * Agents right-panel surface: the fleet view over the native subagent fold,
  * and the ONLY place the roster renders (the chat carries one CTA row per
@@ -289,7 +290,7 @@ function WorkflowScriptView({
           size="icon-micro"
           variant="ghost-muted"
           onClick={onClose}
-          aria-label="Close script"
+          aria-label={t("Close script")}
           className="ml-auto"
         >
           <X aria-hidden className="size-3" />
@@ -302,7 +303,7 @@ function WorkflowScriptView({
             {result.value.truncated ? "\n… (truncated)" : ""}
           </pre>
         ) : result._tag === "Failure" ? (
-          <p className="text-xs text-destructive-foreground">Could not load the script.</p>
+          <p className="text-xs text-destructive-foreground">{t("Could not load the script.")}</p>
         ) : (
           <p className="text-xs text-muted-foreground">Loading…</p>
         )}
@@ -425,7 +426,7 @@ function ExpandedWorkflowSection({
           size="icon-micro"
           variant="ghost-muted"
           onClick={onCollapse}
-          aria-label="Collapse workflow"
+          aria-label={t("Collapse workflow")}
         >
           <ChevronDown aria-hidden className="size-3" />
         </Button>
@@ -535,7 +536,7 @@ export function AgentsPanel({
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
         <Bot aria-hidden className="size-6 text-muted-foreground/60" />
-        <p className="text-sm font-medium">No agents yet</p>
+        <p className="text-sm font-medium">{t("No agents yet")}</p>
         <p className="max-w-56 text-xs text-muted-foreground">
           When this thread spawns subagents or runs a workflow, they show up here with live status,
           activity, and token usage.
@@ -559,7 +560,7 @@ export function AgentsPanel({
           {model.directAgents.length > 0 ? (
             <section>
               <div className="px-1.5 pt-1 text-[.65rem] font-medium uppercase tracking-wider text-muted-foreground">
-                Direct spawns
+                {t("Direct spawns")}
               </div>
               {model.directAgents.map((agent) => (
                 <AgentRow key={agent.id} agent={agent} />

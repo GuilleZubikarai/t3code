@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { connectionStatusText } from "@t3tools/client-runtime/connection";
 
 import {
@@ -31,7 +32,7 @@ export function LoadBalancingSettings({
     return (
       <SettingsSection {...searchableSetting("load-balancing")} variant="plain">
         <p className="px-3 text-sm text-muted-foreground sm:px-4">
-          Connect another machine to automatically balance load across environments.
+          {t("Connect another machine to automatically balance load across environments.")}
         </p>
       </SettingsSection>
     );
@@ -40,11 +41,11 @@ export function LoadBalancingSettings({
   return (
     <SettingsSection {...searchableSetting("load-balancing")}>
       <SettingsRow
-        title="Automatically balance load"
-        description="Choose a machine automatically for new threads in shared projects."
+        title={t("Automatically balance load")}
+        description={t("Choose a machine automatically for new threads in shared projects.")}
         control={
           <Switch
-            aria-label="Automatically balance load"
+            aria-label={t("Automatically balance load")}
             checked={settings.loadBalancingEnabled}
             disabled={!settingsHydrated}
             onCheckedChange={(loadBalancingEnabled) => updateSettings({ loadBalancingEnabled })}

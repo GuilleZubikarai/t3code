@@ -1,4 +1,5 @@
-"use client";
+import { t } from "~/i18n/t";
+("use client");
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox";
 import { ChevronsUpDownIcon, SearchIcon, XIcon } from "lucide-react";
@@ -401,7 +402,7 @@ function ComboboxChipRemove({
       {...props}
     >
       <span id={removeLabelId} className="sr-only">
-        Remove
+        {t("Remove")}
       </span>
       <XIcon aria-hidden="true" />
     </ComboboxPrimitive.ChipRemove>

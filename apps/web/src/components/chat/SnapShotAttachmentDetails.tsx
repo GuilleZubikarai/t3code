@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { SnapShotSource } from "@t3tools/contracts";
 import { ImageIcon, TextIcon } from "lucide-react";
 import { Suspense, use, useMemo, type CSSProperties } from "react";
@@ -170,7 +171,7 @@ export function SnapShotContentsButton({
         viewportClassName="max-h-[min(28rem,70vh)]"
       >
         <div className="space-y-2">
-          <PopoverTitle className="text-sm leading-5">Accessibility data</PopoverTitle>
+          <PopoverTitle className="text-sm leading-5">{t("Accessibility data")}</PopoverTitle>
           {accessibilityDetails ? (
             <SnapShotAccessibilityData
               details={accessibilityDetails}
@@ -183,7 +184,7 @@ export function SnapShotContentsButton({
             </div>
           ) : (
             <div className="rounded-md border border-border/70 bg-muted/45 p-2.5 text-muted-foreground text-xs leading-4">
-              The app or capture backend did not provide verified accessibility data.
+              {t("The app or capture backend did not provide verified accessibility data.")}
             </div>
           )}
         </div>

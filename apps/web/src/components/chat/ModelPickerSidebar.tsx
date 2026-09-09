@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { type ProviderInstanceId } from "@t3tools/contracts";
 import { memo, useLayoutEffect, useRef, useState } from "react";
 import { SparklesIcon, StarIcon } from "lucide-react";
@@ -113,7 +114,7 @@ export const ModelPickerSidebar = memo(function ModelPickerSidebar(props: {
                         )}
                         onClick={() => handleSelect("favorites")}
                         type="button"
-                        aria-label="Favorites"
+                        aria-label={t("Favorites")}
                       >
                         <StarIcon className="size-5 fill-current shrink-0" aria-hidden />
                       </button>
@@ -125,7 +126,7 @@ export const ModelPickerSidebar = memo(function ModelPickerSidebar(props: {
                     align="center"
                     className={PICKER_TOOLTIP_CLASS}
                   >
-                    Favorites
+                    {t("Favorites")}
                   </TooltipPopup>
                 </Tooltip>
               </div>

@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { RotateCcwIcon } from "lucide-react";
 import {
   Outlet,
@@ -27,7 +28,7 @@ function RestoreDefaultsButton({ onRestored }: { onRestored: () => void }) {
       onClick={() => void restoreDefaults()}
     >
       <RotateCcwIcon className="mx-1 size-3.5" />
-      Restore defaults
+      {t("Restore defaults")}
     </Button>
   );
 }

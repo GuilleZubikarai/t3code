@@ -5848,7 +5848,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                         >
                           <PaperclipIcon />
                         </TooltipTrigger>
-                        <TooltipPopup>Attach files</TooltipPopup>
+                        <TooltipPopup>{t("Attach files")}</TooltipPopup>
                       </Tooltip>
                     </>
                   ) : null}

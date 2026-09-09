@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { TriangleAlertIcon } from "lucide-react";
 
 import { useSharedSettingsSync } from "../../hooks/useSettings";
@@ -24,7 +25,7 @@ export function SharedSettingsMismatchAlert() {
       </AlertDescription>
       <AlertAction>
         <Button variant="outline" size="xs" onClick={applyToAll}>
-          Apply to all
+          {t("Apply to all")}
         </Button>
       </AlertAction>
     </Alert>

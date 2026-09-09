@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { useAuth } from "@clerk/react";
 import { AuthAdministrativeScopes, AuthRelayWriteScope } from "@t3tools/contracts";
 import { useEffect, useRef, useState } from "react";
@@ -210,7 +211,7 @@ function ConfiguredConnectOnboardingDialog() {
     >
       <WizardPopup>
         <WizardHeader
-          title="Set up T3 Connect"
+          title={t("Set up T3 Connect")}
           description={
             <>
               Mesh your devices together — publish this environment and connect the rest, all in one
@@ -251,14 +252,14 @@ function ConfiguredConnectOnboardingDialog() {
                 checked={dontShowAgain}
                 onCheckedChange={(checked) => setDontShowAgain(checked === true)}
               />
-              Don&apos;t show this again
+              {t("Don't show this again")}
             </label>
           }
         >
           {step === "publish" ? (
             <>
               <Button variant="ghost" disabled={isApplying} onClick={() => setStep("devices")}>
-                Not now
+                {t("Not now")}
               </Button>
               <Button
                 disabled={isApplying || (controller.linkState.isPending && linkStateData === null)}
@@ -269,7 +270,7 @@ function ConfiguredConnectOnboardingDialog() {
             </>
           ) : (
             <Button disabled={isApplying} onClick={complete}>
-              Done
+              {t("Done")}
             </Button>
           )}
         </WizardFooter>
@@ -302,15 +303,19 @@ function PublishStep({
     <div className="space-y-3">
       <div className="rounded-lg border">
         <OnboardingToggleRow
-          title="Publish this environment"
-          description="Make this environment available to your other devices through T3 Connect."
+          title={t("Publish this environment")}
+          description={t(
+            "Make this environment available to your other devices through T3 Connect.",
+          )}
           checked={exposeEnvironment}
           disabled={disabled}
           onCheckedChange={onExposeEnvironmentChange}
         />
         <OnboardingToggleRow
-          title="Publish agent activity"
-          description="Send activity from this environment to your mobile clients for push notifications and Live Activities."
+          title={t("Publish agent activity")}
+          description={t(
+            "Send activity from this environment to your mobile clients for push notifications and Live Activities.",
+          )}
           checked={publishAgentActivity}
           disabled={disabled}
           onCheckedChange={onPublishAgentActivityChange}

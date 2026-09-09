@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { ListTodoIcon } from "lucide-react";
 import { memo, type ComponentProps } from "react";
 
@@ -77,7 +78,7 @@ function TaskSummary({
         <ListTodoIcon />
       </ComposerBanner.Icon>
       <ComposerBanner.Content>
-        <span className="shrink-0 text-muted-foreground">Tasks</span>
+        <span className="shrink-0 text-muted-foreground">{t("Tasks")}</span>
         <span
           className="min-w-0 flex-1 truncate text-left font-medium text-foreground/80"
           data-composer-task-current="true"

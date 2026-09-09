@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { EnvironmentId } from "@t3tools/contracts";
 import { ScaleIcon } from "lucide-react";
 import { memo, useMemo } from "react";
@@ -94,7 +95,7 @@ export const BranchToolbarEnvironmentSelector = memo(function BranchToolbarEnvir
         variant="ghost"
         size="xs"
         className="min-w-0 max-w-full font-normal text-xs!"
-        aria-label="Run on"
+        aria-label={t("Run on")}
         data-composer-context-control
       >
         {autoEnvironmentLabel ? (
@@ -119,7 +120,7 @@ export const BranchToolbarEnvironmentSelector = memo(function BranchToolbarEnvir
       </SelectTrigger>
       <SelectPopup alignItemWithTrigger={false} {...composerFloatingLayerProps}>
         <SelectGroup>
-          <SelectGroupLabel>Run on</SelectGroupLabel>
+          <SelectGroupLabel>{t("Run on")}</SelectGroupLabel>
           {onAutoEnvironment && (
             <SelectItem
               value="auto"

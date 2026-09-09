@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { useAtomValue } from "@effect/atom-react";
 import type { EnvironmentId } from "@t3tools/contracts";
 import { ChevronDownIcon, PlusIcon, RotateCcwIcon, XIcon } from "lucide-react";
@@ -247,16 +248,16 @@ export function UsagePriceOverrides({
     >
       <DialogPopup className="max-w-3xl">
         <DialogHeader>
-          <DialogTitle>Custom model prices</DialogTitle>
+          <DialogTitle>{t("Custom model prices")}</DialogTitle>
           <DialogDescription>
-            Prices apply to all past and future usage on the environments you select.
+            {t("Prices apply to all past and future usage on the environments you select.")}
           </DialogDescription>
         </DialogHeader>
         <DialogPanel className="grid gap-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex min-w-0 items-center gap-2">
               <Label id="usage-prices-apply-label" className="shrink-0">
-                Apply to
+                {t("Apply to")}
               </Label>
               <Menu>
                 <MenuTrigger
@@ -275,7 +276,7 @@ export function UsagePriceOverrides({
                     closeOnClick={false}
                     onCheckedChange={(checked) => selectEnvironments(checked ? null : new Set())}
                   >
-                    All environments
+                    {t("All environments")}
                   </MenuCheckboxItem>
                   <MenuSeparator />
                   {environments.map((environment) => (
@@ -303,7 +304,7 @@ export function UsagePriceOverrides({
                 </MenuPopup>
               </Menu>
             </div>
-            <span className="text-xs text-muted-foreground">USD / million tokens</span>
+            <span className="text-xs text-muted-foreground">{t("USD / million tokens")}</span>
           </div>
           {selected.length === 0 ? (
             <p className="text-sm text-muted-foreground">
@@ -314,7 +315,7 @@ export function UsagePriceOverrides({
           ) : (
             <>
               <div className="min-w-0 overflow-hidden rounded-lg border border-border">
-                <Table className="min-w-160 table-fixed" aria-label="Custom model prices">
+                <Table className="min-w-160 table-fixed" aria-label={t("Custom model prices")}>
                   <colgroup>
                     <col className="w-[34%]" />
                     {USAGE_PRICE_FIELDS.map((field) => (
@@ -324,7 +325,7 @@ export function UsagePriceOverrides({
                   </colgroup>
                   <TableHeader>
                     <TableRow className="hover:bg-transparent">
-                      <TableHead className="pl-3">Model ID</TableHead>
+                      <TableHead className="pl-3">{t("Model ID")}</TableHead>
                       {USAGE_PRICE_FIELDS.map((field) => (
                         <TableHead key={field.key}>{field.label}</TableHead>
                       ))}
@@ -332,7 +333,7 @@ export function UsagePriceOverrides({
                         <Button
                           size="icon-xs"
                           variant="ghost"
-                          aria-label="Add model price"
+                          aria-label={t("Add model price")}
                           disabled={locked}
                           onClick={() => {
                             const id = `new:${nextRowId.current++}`;
@@ -375,12 +376,12 @@ export function UsagePriceOverrides({
                                     focusRowRef.current = null;
                                   }
                                 }}
-                                aria-label="New model ID"
+                                aria-label={t("New model ID")}
                                 aria-invalid={
                                   (row.model.trim() !== "" && errors.has(row.id)) || undefined
                                 }
                                 list="usage-price-models"
-                                placeholder="Model ID"
+                                placeholder={t("Model ID")}
                                 autoComplete="off"
                                 spellCheck={false}
                                 disabled={locked}
@@ -408,7 +409,7 @@ export function UsagePriceOverrides({
                           </TableCell>
                           {row.removed ? (
                             <TableCell colSpan={4} className="text-muted-foreground">
-                              Automatic pricing after saving
+                              {t("Automatic pricing after saving")}
                             </TableCell>
                           ) : (
                             USAGE_PRICE_FIELDS.map((field) => {

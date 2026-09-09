@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { Spinner } from "~/components/ui/spinner";
 import type { ProjectContentMatch } from "@t3tools/contracts";
 
@@ -84,7 +85,7 @@ function SearchOptionButton(props: {
 function EmptyContentSearchDialog() {
   return (
     <CommandPaletteContent
-      aria-label="Search project contents"
+      aria-label={t("Search project contents")}
       escapeLabel="Back"
       footerActionLabel="Open file"
       inputProps={{ disabled: true, placeholder: "Search project contents…" }}
@@ -93,7 +94,7 @@ function EmptyContentSearchDialog() {
       testId="project-content-search"
       value=""
     >
-      Open a project to search its files.
+      {t("Open a project to search its files.")}
     </CommandPaletteContent>
   );
 }
@@ -169,21 +170,21 @@ function OpenContentSearchDialog(props: {
         <div className="absolute inset-e-2.5 top-1/2 flex shrink-0 -translate-y-1/2 items-center gap-0.5 rounded-md border bg-muted/30 p-0.5">
           <SearchOptionButton
             active={caseSensitive}
-            label="Match case"
+            label={t("Match case")}
             onClick={() => setCaseSensitive((current) => !current)}
           >
             Aa
           </SearchOptionButton>
           <SearchOptionButton
             active={wholeWord}
-            label="Match whole word"
+            label={t("Match whole word")}
             onClick={() => setWholeWord((current) => !current)}
           >
             <span className="underline decoration-2 underline-offset-2">ab</span>
           </SearchOptionButton>
           <SearchOptionButton
             active={useRegex}
-            label="Use regular expression"
+            label={t("Use regular expression")}
             onClick={() => setUseRegex((current) => !current)}
           >
             .*
@@ -231,7 +232,7 @@ function OpenContentSearchDialog(props: {
           ) : search.error ? (
             <span className="text-destructive">{search.error}</span>
           ) : search.invalidRegex ? (
-            <span className="text-destructive">Invalid regular expression</span>
+            <span className="text-destructive">{t("Invalid regular expression")}</span>
           ) : (
             `${matches.length.toLocaleString()}${search.truncated ? "+" : ""} results in ${fileCount.toLocaleString()} files`
           )}

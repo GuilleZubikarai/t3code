@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import { resolveEnvironmentMachineKind } from "@t3tools/contracts";
 import { ChevronDownIcon, FolderIcon } from "lucide-react";
 import { type ReactNode, useState } from "react";
@@ -109,7 +110,7 @@ export function ProjectsSettings({
           <div
             className="flex flex-wrap items-center gap-2"
             role="group"
-            aria-label="Settings scope"
+            aria-label={t("Settings scope")}
           >
             {environments.length > 3 ? (
               <ScopePicker
@@ -120,7 +121,7 @@ export function ProjectsSettings({
               />
             ) : (
               <ToggleGroup
-                aria-label="Machine scope"
+                aria-label={t("Machine scope")}
                 variant="segmented"
                 className="max-w-full flex-wrap"
                 value={[machineId ?? "all"]}
@@ -129,7 +130,7 @@ export function ProjectsSettings({
                   if (value) onScopeChange(projectKey, value === "all" ? null : value);
                 }}
               >
-                <Toggle value="all">All machines</Toggle>
+                <Toggle value="all">{t("All machines")}</Toggle>
                 {machineOptions.map((option) => (
                   <Toggle key={option.value} value={option.value} title={option.label}>
                     {option.icon}
@@ -154,7 +155,9 @@ export function ProjectsSettings({
         </WorkspacePageContainer>
       </div>
       {machineId !== null && !machine ? (
-        <p className="p-8 text-sm text-muted-foreground">This machine is no longer available.</p>
+        <p className="p-8 text-sm text-muted-foreground">
+          {t("This machine is no longer available.")}
+        </p>
       ) : projectKey === null ? (
         <ProjectDefaultsSettings environmentId={machine?.environmentId ?? null} />
       ) : (

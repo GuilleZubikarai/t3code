@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { DesktopSshPasswordPromptRequest } from "@t3tools/contracts";
 import { useEffect, useId, useRef, useState } from "react";
 
@@ -158,7 +159,7 @@ function ActiveSshPasswordPrompt({
     >
       <DialogPopup className="max-w-md" showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>SSH Password Required</DialogTitle>
+          <DialogTitle>{t("SSH Password Required")}</DialogTitle>
           <DialogDescription>
             T3 needs your SSH password to connect to <code>{target}</code>. The password is passed
             to the local SSH process for this connection attempt and is not saved by T3 Code.
@@ -202,7 +203,7 @@ function ActiveSshPasswordPrompt({
               <p className="text-sm text-destructive">{visibleResponseError}</p>
             ) : (
               <p className="text-sm text-muted-foreground">
-                Use SSH keys to avoid repeated password prompts on new SSH sessions.
+                {t("Use SSH keys to avoid repeated password prompts on new SSH sessions.")}
               </p>
             )}
           </form>
@@ -212,7 +213,7 @@ function ActiveSshPasswordPrompt({
             {isExpired ? "Dismiss" : "Cancel"}
           </Button>
           <Button disabled={isResponding || isExpired} form={formId} type="submit">
-            Continue
+            {t("Continue")}
           </Button>
         </DialogFooter>
       </DialogPopup>

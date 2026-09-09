@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { DesktopBridge, DesktopUpdateState } from "@t3tools/contracts";
 import { ArrowRightIcon } from "lucide-react";
 
@@ -36,7 +37,7 @@ function ReleaseNotesLink({
       }}
       type="button"
     >
-      Read more
+      {t("Read more")}
       <ArrowRightIcon
         aria-hidden
         className="ml-1 inline size-3 -rotate-45 align-[-0.125em]"

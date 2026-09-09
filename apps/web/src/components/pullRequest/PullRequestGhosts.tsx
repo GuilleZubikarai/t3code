@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 /**
  * Loading states specific to the pull request surface — the first list, a search under way,
  * and a detail panel opening — use bars in the geometry of the content they stand for, pulsing
@@ -86,7 +87,7 @@ export function PullRequestDetailGhost({ seed }: { seed?: PullRequestListEntry |
   return (
     <div
       role="status"
-      aria-label="Loading pull request"
+      aria-label={t("Loading pull request")}
       className={cn(
         "flex h-full min-h-0 flex-col overflow-hidden bg-background",
         !seed && "motion-safe:animate-skeleton",
@@ -273,7 +274,7 @@ export function PullRequestPeopleGhost({ rows = 4 }: { rows?: number }) {
   return (
     <div
       role="status"
-      aria-label="Loading people"
+      aria-label={t("Loading people")}
       className="motion-safe:animate-skeleton space-y-1 p-1"
     >
       {Array.from({ length: rows }, (_, index) => (
@@ -291,7 +292,7 @@ export function PullRequestTimelineGhost({ rows = 6 }: { rows?: number }) {
   return (
     <div
       role="status"
-      aria-label="Loading timeline"
+      aria-label={t("Loading timeline")}
       className="motion-safe:animate-skeleton px-4 py-5"
     >
       <div className="relative ml-2 border-l border-border/70 pl-5">
@@ -312,7 +313,7 @@ export function PullRequestConversationGhost({ rows = 3 }: { rows?: number }) {
   return (
     <div
       role="status"
-      aria-label="Loading pull request conversation"
+      aria-label={t("Loading pull request conversation")}
       className="motion-safe:animate-skeleton space-y-4 py-2"
     >
       {Array.from({ length: rows }, (_, index) => (

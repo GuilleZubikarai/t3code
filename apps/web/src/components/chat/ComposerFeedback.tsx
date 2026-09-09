@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   codexFeedbackNotice,
   type CodexFeedbackSubmission,
@@ -39,7 +40,7 @@ export function feedbackBannerItem(
             );
           }}
         >
-          Copy ID
+          {t("Copy ID")}
         </Button>
       ) : undefined,
     ...(submission.status !== "uploading"

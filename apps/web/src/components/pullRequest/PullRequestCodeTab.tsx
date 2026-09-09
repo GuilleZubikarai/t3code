@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { CodeViewItem, DiffLineAnnotation, SelectedLineRange } from "@pierre/diffs";
 import type { CodeViewDiffItem, CodeViewHandle } from "@pierre/diffs/react";
 import type {
@@ -699,9 +700,9 @@ function PullRequestCodeTab({
         >
           {diffQuery.error !== null ? (
             <>
-              <span>The rest of this diff could not be loaded.</span>
+              <span>{t("The rest of this diff could not be loaded.")}</span>
               <Button size="xs" variant="outline" onClick={() => diffQuery.refresh()}>
-                Retry
+                {t("Retry")}
               </Button>
             </>
           ) : diffQuery.isPending ? (
@@ -961,7 +962,7 @@ function PullRequestCodeTab({
               type="button"
               size="icon-sm"
               variant="ghost"
-              aria-label="Close review"
+              aria-label={t("Close review")}
               className="absolute right-2 top-2"
               onClick={() => setReviewOpen(false)}
             >
@@ -1035,7 +1036,7 @@ function PullRequestCodeTab({
                 className={commit === null ? "bg-foreground/[0.08]" : undefined}
                 onClick={() => onSelectedCommitChange(null)}
               >
-                <span>All commits</span>
+                <span>{t("All commits")}</span>
               </DropdownMenuItem>
               {orderedCommits.slice(0, visibleCommitCount).map((entry) => (
                 <DropdownMenuItem
@@ -1082,7 +1083,7 @@ function PullRequestCodeTab({
             <Tooltip>
               <TooltipTrigger render={<span className="flex shrink-0 items-center" />}>
                 <TriangleAlertIcon
-                  aria-label="Some of this diff was not shown"
+                  aria-label={t("Some of this diff was not shown")}
                   className="size-3.5 text-amber-600 dark:text-amber-500"
                 />
               </TooltipTrigger>
@@ -1096,7 +1097,7 @@ function PullRequestCodeTab({
             <Tooltip>
               <TooltipTrigger render={<span className="flex shrink-0 items-center" />}>
                 <MessageSquareOffIcon
-                  aria-label="Line comments are written from the whole change"
+                  aria-label={t("Line comments are written from the whole change")}
                   className="size-3.5"
                 />
               </TooltipTrigger>
@@ -1138,7 +1139,7 @@ function PullRequestCodeTab({
           </Tooltip>
         ) : null}
         <ToggleGroup
-          aria-label="Diff layout"
+          aria-label={t("Diff layout")}
           className="shrink-0"
           variant="segmented"
           value={[diffLayout]}
@@ -1149,10 +1150,10 @@ function PullRequestCodeTab({
             }
           }}
         >
-          <Toggle aria-label="Stacked diff view" value="stacked">
+          <Toggle aria-label={t("Stacked diff view")} value="stacked">
             <Rows3Icon className="size-3.5" />
           </Toggle>
-          <Toggle aria-label="Split diff view" value="split">
+          <Toggle aria-label={t("Split diff view")} value="split">
             <Columns2Icon className="size-3.5" />
           </Toggle>
         </ToggleGroup>
@@ -1217,7 +1218,7 @@ function PullRequestCodeTab({
   // Under the toolbar rather than in place of it, so choosing a commit does not take the
   // dropdown that was just used off the screen while its diff loads.
   if (diffQuery.isPending && loadedSlices.length === 0) {
-    return withReviewBar(<DiffPanelLoadingState label="Loading pull request diff..." />);
+    return withReviewBar(<DiffPanelLoadingState label={t("Loading pull request diff...")} />);
   }
 
   // A slice that fails once there are files on screen is reported at the end of them instead:

@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import {
   ANTIGRAVITY_DEFAULT_MODEL,
   type ProviderInstanceId,
@@ -797,7 +798,7 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
                   ref={searchInputRef}
                   className="[&_input]:h-6.5 [&_input]:font-sans [&_input]:leading-6.5"
                   inputClassName="rounded-none bg-transparent text-sm"
-                  placeholder="Search models..."
+                  placeholder={t("Search models...")}
                   showTrigger={false}
                   startAddon={
                     <SearchIcon className="-translate-x-0.5 size-4 shrink-0 text-muted-foreground opacity-70" />
@@ -860,7 +861,9 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
                           contentClassName="flex w-full items-center gap-3"
                         >
                           <div className="min-w-0 flex-1 text-left">
-                            <div className="text-xs font-medium leading-snug">Legacy models</div>
+                            <div className="text-xs font-medium leading-snug">
+                              {t("Legacy models")}
+                            </div>
                             <div className="mt-1 text-xs font-normal leading-snug text-muted-foreground/70">
                               {legacySection.legacyModels.length} models
                             </div>
@@ -946,7 +949,7 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
               </div>
             ) : (
               <ComboboxEmpty className="not-empty:py-6 empty:h-0 text-xs font-normal leading-snug">
-                No models found
+                {t("No models found")}
               </ComboboxEmpty>
             )}
           </div>

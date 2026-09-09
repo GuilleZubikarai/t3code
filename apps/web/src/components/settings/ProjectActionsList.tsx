@@ -1,3 +1,4 @@
+import { t } from "~/i18n/t";
 import type { ProjectScript, ResolvedKeybindingsConfig } from "@t3tools/contracts";
 import { SettingsIcon } from "lucide-react";
 import { shortcutLabelForCommand } from "../../keybindings";
@@ -20,7 +21,7 @@ export function ProjectActionsList({
   if (scripts.length === 0)
     return (
       <p className="px-3 py-2 text-base text-muted-foreground sm:px-4 sm:text-sm">
-        No actions configured.
+        {t("No actions configured.")}
       </p>
     );
   return scripts.map((script) => {
