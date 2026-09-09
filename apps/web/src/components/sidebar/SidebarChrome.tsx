@@ -4,6 +4,7 @@ import {
   ChartNoAxesColumnIcon,
   GitPullRequestIcon,
   SettingsIcon,
+  TerminalSquareIcon,
 } from "lucide-react";
 import type { ReactNode } from "react";
 import { memo, useCallback } from "react";
@@ -146,7 +147,9 @@ export const SidebarUtilityMenu = memo(function SidebarUtilityMenu() {
             ? "usage"
             : location.pathname === "/pull-requests"
               ? "pull-requests"
-              : null,
+              : location.pathname === "/agent-terminals"
+                ? "agent-terminals"
+                : null,
   });
   const { environments } = useEnvironments();
   // The page reads every connected server, so one of them offering pull requests is enough for
@@ -169,6 +172,11 @@ export const SidebarUtilityMenu = memo(function SidebarUtilityMenu() {
   const handleSettingsClick = useCallback(() => {
     closeMobileSidebar();
     void navigate({ to: "/settings" });
+  }, [closeMobileSidebar, navigate]);
+
+  const handleAgentTerminalsClick = useCallback(() => {
+    closeMobileSidebar();
+    void navigate({ to: "/agent-terminals" });
   }, [closeMobileSidebar, navigate]);
 
   const handleUsageClick = useCallback(() => {
@@ -214,6 +222,11 @@ export const SidebarUtilityMenu = memo(function SidebarUtilityMenu() {
             icon={<ChartNoAxesColumnIcon />}
             label={t("Usage")}
             onClick={handleUsageClick}
+          />
+          <SidebarUtilityItem
+            icon={<TerminalSquareIcon />}
+            label={t("Agent terminals")}
+            onClick={handleAgentTerminalsClick}
           />
         </>
       )}

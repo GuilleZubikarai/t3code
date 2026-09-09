@@ -1506,4 +1506,21 @@ export const es: Readonly<Record<string, string>> = {
   "Zoom in": "Acercar",
   "Zoom out": "Alejar",
   Author: "Autor",
+
+  // Agent terminals hub (fork feature)
+  "Agent terminals": "Terminal de agentes",
+  "All working agents": "Todos los agentes activos",
+  "{count} agent(s) working": "{count} agente(s) trabajando",
+  "{count} shell(s) running": "{count} terminal(es) en ejecución",
+  "No threads with agent activity.": "No hay hilos con actividad de agentes.",
+  "No agent is running commands right now. Pick a thread on the left to see its history.":
+    "Ningún agente está ejecutando comandos ahora mismo. Elige un hilo a la izquierda para ver su historial.",
+  "Showing {shown} of {total} working agents. Pick one on the left to see the rest.":
+    "Mostrando {shown} de {total} agentes activos. Elige uno a la izquierda para ver el resto.",
+  "This agent has not run any commands yet.": "Este agente aún no ha ejecutado ningún comando.",
+  "Waiting for output…": "Esperando salida…",
+  "Loading…": "Cargando…",
+  Follow: "Seguir",
+  "Open thread": "Abrir hilo",
+  Running: "En ejecución",
 };

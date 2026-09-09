@@ -50,6 +50,7 @@ import {
   SettingsIcon,
   SquarePenIcon,
   TextSearchIcon,
+  TerminalSquareIcon,
 } from "lucide-react";
 import {
   useCallback,
@@ -1687,6 +1688,17 @@ function OpenCommandPaletteDialog(props: {
     icon: <SettingsIcon className={ITEM_ICON_CLASS} />,
     run: async () => {
       await navigate({ to: "/settings" });
+    },
+  });
+
+  actionItems.push({
+    kind: "action",
+    value: "action:agent-terminals",
+    searchTerms: ["terminal", "agents", "commands", "agentes", "terminales", "comandos"],
+    title: "Agent terminals",
+    icon: <TerminalSquareIcon className={ITEM_ICON_CLASS} />,
+    run: async () => {
+      await navigate({ to: "/agent-terminals" });
     },
   });
 
